@@ -1,0 +1,79 @@
+﻿@model IEnumerable<NutraBioticsBackend.Models.Customer>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Clientes</h2>
+
+@*<p>
+        @Html.ActionLink("Nuevo ShipTo", "Create")
+    </p>*@
+
+<hr />
+@*<p>
+    @Html.DropDownList("CustomerId", new SelectList(Model.GetAll(), "Id", "Name"), new { onchange = "this.form.submit();" })%><input type="submit" name="btnSubmit" value="Submit" />
+</p>*@
+<hr />
+
+@Html.Grid(Model).Named("CustomersGrid").Columns(columns =>
+{
+    columns.Add(c => c.Company).Titled("Compañia").SetWidth(110).Sortable(true);
+
+    columns.Add(c => c.CustomerId).Titled("ID").SetWidth(110).Sortable(true);
+
+    columns.Add(c => c.CustNum).Titled("CustNum").SetWidth(110);
+
+    columns.Add(c => c.Names).Titled("Nombres").SetWidth(110).Filterable(true).Sortable(true);
+
+    columns.Add(c => c.ShipViaCode).Titled("ShipViaCode").SetWidth(110);
+
+    columns.Add(c => c.Country).Titled("Pais").SetWidth(110);
+
+    columns.Add(c => c.State).Titled("Departamento").SetWidth(110);
+
+    columns.Add(c => c.City).Titled("Ciudad").SetWidth(110);
+
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30)
+        .RenderValueAs(o => @Html.ActionLink("Details", "Details", new { id = o.CustomerId }, new { @class = "btn btn-Nutra" }));
+
+
+    //columns.Add(c => c.CustNum).Titled("Pais").SetWidth(110);
+    //columns.Add(c => c.CustNum).Sortable(true);
+
+    //columns.Add(c => c.CustNum).Titled("Departamento").SetWidth(110);
+    //columns.Add(c => c.CustNum).Sortable(true);
+
+    //columns.Add(c => c.CustNum).Titled("Ciudad").SetWidth(110);
+    //columns.Add(c => c.CustNum).Sortable(true);
+
+    //columns.Add(c => c.CustNum).Titled("Direccion").SetWidth(110);
+    //columns.Add(c => c.CustNum).Sortable(true);
+}).WithPaging(20)
+
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+
+<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
+
+
+@*<script>
+    $(function (row) {
+        pageGrids.CustomersGrid.onRowSelect(function (e) {
+            var url = '~/Controllers/Customers/Details/' + e.row.CustomerId;
+            $.ajax({
+                url: url,
+                data: {},
+                type: 'GET',
+                dataType: 'Html',
+                success: function (data) { alert('im here with data'); },
+                error: function () { alert('Error occured'); }
+            });
+        });
+    });
+  </script>*@
+}
+
