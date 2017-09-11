@@ -39,17 +39,6 @@
         .RenderValueAs(o => @Html.ActionLink("Details", "Details", new { id = o.CustomerId }, new { @class = "btn btn-Nutra" }));
 
 
-    //columns.Add(c => c.CustNum).Titled("Pais").SetWidth(110);
-    //columns.Add(c => c.CustNum).Sortable(true);
-
-    //columns.Add(c => c.CustNum).Titled("Departamento").SetWidth(110);
-    //columns.Add(c => c.CustNum).Sortable(true);
-
-    //columns.Add(c => c.CustNum).Titled("Ciudad").SetWidth(110);
-    //columns.Add(c => c.CustNum).Sortable(true);
-
-    //columns.Add(c => c.CustNum).Titled("Direccion").SetWidth(110);
-    //columns.Add(c => c.CustNum).Sortable(true);
 }).WithPaging(20)
 
 
@@ -60,20 +49,4 @@
 <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
 
 
-@*<script>
-    $(function (row) {
-        pageGrids.CustomersGrid.onRowSelect(function (e) {
-            var url = '~/Controllers/Customers/Details/' + e.row.CustomerId;
-            $.ajax({
-                url: url,
-                data: {},
-                type: 'GET',
-                dataType: 'Html',
-                success: function (data) { alert('im here with data'); },
-                error: function () { alert('Error occured'); }
-            });
-        });
-    });
-  </script>*@
-}
-
+    }

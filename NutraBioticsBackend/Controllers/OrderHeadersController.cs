@@ -11,14 +11,20 @@ using Microsoft.AspNet.Identity;
 
 namespace NutraBioticsBackend.Controllers
 {
+
+    [Authorize(Roles = "User")]
     public class OrderHeadersController : Controller
     {
+
+        int vendorid = Convert.ToInt32(System.Web.HttpContext.Current.Session["VendorId"]);
+        int userid = Convert.ToInt32(System.Web.HttpContext.Current.Session["User"]);
+
         private DataContext db = new DataContext();
 
         // GET: OrderHeaders
         public ActionResult Index()
         {
-            var orderHeaders = db.OrderHeaders.Include(o => o.Contact).Include(o => o.Customer).Include(o => o.ShipTo).Include(o => o.User).Where(o => o.RowMod != "D").OrderByDescending(o => o.SalesOrderHeaderId);
+            var orderHeaders = db.OrderHeaders.Include(o => o.Contact).Include(o => o.Customer).Include(o => o.ShipTo).Include(o => o.User).Where(o => o.RowMod != "D" && o.UserId == userid).OrderByDescending(o => o.SalesOrderHeaderId);
 
             return View(orderHeaders.ToList());
         }
@@ -29,7 +35,7 @@ namespace NutraBioticsBackend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var orderDetailTmpConsulta = db.OrderDetailTmp.Where(o => o.UserId == 1 && o.OrderDetailTmpId == id).FirstOrDefault();
+            var orderDetailTmpConsulta = db.OrderDetailTmp.Where(o => o.UserId == userid && o.OrderDetailTmpId == id).FirstOrDefault();
             if (orderDetailTmpConsulta == null)
             {
                 return HttpNotFound();
@@ -62,7 +68,7 @@ namespace NutraBioticsBackend.Controllers
         {
             if (ModelState.IsValid)
             {
-                var orderDetailTmpConsulta = db.OrderDetailTmp.Where(o => o.UserId == 1 && o.PartId == view.PartId).FirstOrDefault();
+                var orderDetailTmpConsulta = db.OrderDetailTmp.Where(o => o.UserId == userid && o.PartId == view.PartId).FirstOrDefault();
 
                 if (orderDetailTmpConsulta == null)
                 {
@@ -79,7 +85,7 @@ namespace NutraBioticsBackend.Controllers
                         TaxAmt = 0,
                         Total = view.OrderQty * view.UnitPrice,
                         UnitPrice = view.UnitPrice,
-                        UserId = 1
+                        UserId = userid,
                     };
                     db.OrderDetailTmp.Add(orderDetailTmp);
                 }
@@ -128,7 +134,7 @@ namespace NutraBioticsBackend.Controllers
                     SalesOrderHeaderInterId = 0,
                     ShipToId = shipto.ShipToId,
                     ShipToNum = shipto.ShipToNum,
-                    UserId = 1,
+                    UserId = userid,
                     VendorId = 74,
                     Date = Date,
                     NeedByDate = NeedByDate,
@@ -163,7 +169,7 @@ namespace NutraBioticsBackend.Controllers
                 var orderDetailConsultaLine = db.OrderDetails.Where(o => o.SalesOrderHeaderId == view.SalesOrderHeaderId).OrderByDescending(o => o.OrderLine).FirstOrDefault();
                 if (orderDetailConsultaLine != null)
                 {
-                    Line = orderDetailConsultaLine.OrderLine;
+                    Line = orderDetailConsultaLine.OrderLine+1;
                 }
                 else
                 {
@@ -245,7 +251,7 @@ namespace NutraBioticsBackend.Controllers
                 NeedByDate = DateTime.Now
             };
             ViewBag.UserId = new SelectList(db.Users, "UserId", "FirstName");
-            var v = db.NewOrderView.Where(o => o.UserId == 1).FirstOrDefault();
+            var v = db.NewOrderView.Where(o => o.UserId == userid).FirstOrDefault();
             if (v != null)
             {
                 ViewBag.CustomerId = new SelectList(db.Customers.Where(c => c.VendorId == 74 && c.CustomerId == v.CustomerId), "CustomerId", "Names");
@@ -263,7 +269,7 @@ namespace NutraBioticsBackend.Controllers
                 ViewBag.PriceListId = new SelectList(db.PriceLists.OrderBy(P => P.PriceListId), "PriceListId", "ListDescription");
             }
 
-            view.OrderDetails = db.OrderDetailTmp.Where(o => o.UserId == 1).ToList();
+            view.OrderDetails = db.OrderDetailTmp.Where(o => o.UserId == userid).ToList();
             //ViewBag.ShipToId = new SelectList(db.ShipToes.Where(c => c.VendorId == 74 && c.CustomerId == db.Customers.FirstOrDefault().CustomerId).OrderBy(c => c.ShipToName), "ShipToId", "ShipToName");
             //ViewBag.ContactId = new SelectList(db.Contacts.Where(c => c.VendorId == 74 && c.ShipToId == db.ShipToes.FirstOrDefault().ShipToId).OrderBy(c => c.Name), "ContactId", "Name");
             //ViewBag.PriceListId = new SelectList(db.PriceLists.Where(p => p.PriceListId == 0).OrderBy(P => P.PriceListId), "PriceListId", "ListDescription");
@@ -279,6 +285,7 @@ namespace NutraBioticsBackend.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(NewOrderView view)//
         {
+
             view.RowMod = "C";
             view.Platform = "WEB";
             view.SalesCategory = "Bogota";
@@ -301,9 +308,9 @@ namespace NutraBioticsBackend.Controllers
                 var contact = db.Contacts.Where(c => c.ContactId == view.ContactId).FirstOrDefault();
                 view.ConNum = contact.ConNum;
             }
-            view.OrderDetails = db.OrderDetailTmp.Where(o => o.UserId == 1).ToList();
+            view.OrderDetails = db.OrderDetailTmp.Where(o => o.UserId == userid).ToList();
 
-            var response = MovementsHelper.NewOrder(view, 1);
+            var response = MovementsHelper.NewOrder(view, userid, vendorid);
             if (response.Succes)
             {
                 return RedirectToAction("Index");
@@ -313,7 +320,7 @@ namespace NutraBioticsBackend.Controllers
             //db.OrderHeaders.Add(orderHeader);
             //db.SaveChanges();             
 
-            view.OrderDetails = db.OrderDetailTmp.Where(o => o.UserId == 1).ToList();
+            view.OrderDetails = db.OrderDetailTmp.Where(o => o.UserId == userid).ToList();
             ViewBag.ContactId = new SelectList(db.Contacts, "ContactId", "Name", view.ContactId);
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "Names", view.CustomerId);
             ViewBag.ShipToId = new SelectList(db.ShipToes, "ShipToId", "ShipToName", view.ShipToId);
@@ -353,6 +360,10 @@ namespace NutraBioticsBackend.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(OrderHeader orderHeader)
         {
+
+            var vendorid = Convert.ToInt32(System.Web.HttpContext.Current.Session["VendorId"]);
+            var userid = Convert.ToInt32(System.Web.HttpContext.Current.Session["User"]);
+
             string control = string.Empty;
             int sw = 1;
             if (orderHeader.ContactId == 0)
@@ -389,6 +400,8 @@ namespace NutraBioticsBackend.Controllers
             orderHeader.Platform = "WEB";
             orderHeader.RowMod = "U";
             orderHeader.SalesCategory = "";
+            orderHeader.UserId = userid;
+            orderHeader.VendorId = vendorid;
             orderHeader.OrderDetailList = db.OrderDetails.Where(o => o.SalesOrderHeaderId == orderHeader.SalesOrderHeaderId).ToList();
             if (ModelState.IsValid && sw == 1)
             {

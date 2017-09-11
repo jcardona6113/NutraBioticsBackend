@@ -14,7 +14,7 @@ namespace NutraBioticsBackend.Models
             db.Dispose();
         }
 
-        public static Response NewOrder(NewOrderView view, int UserId)
+        public static Response NewOrder(NewOrderView view, int UserId, int VendorId)
         {
 
             using (var Transaction = db.Database.BeginTransaction())
@@ -43,7 +43,7 @@ namespace NutraBioticsBackend.Models
                         TermsCode = view.TermsCode,
                         Total = view.Total,
                         UserId = UserId,
-                        VendorId = view.VendorId,
+                        VendorId = VendorId,
                         PriceListId = view.PriceListId,
                         RowMod = "C"
                     };
