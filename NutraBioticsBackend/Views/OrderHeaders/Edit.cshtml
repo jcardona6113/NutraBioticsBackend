@@ -78,18 +78,30 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    <div class='input-group date' id='datepicker' style="width:280px">
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
                 </div>
             </div>
+
 
             <div class="form-group">
                 @Html.LabelFor(model => model.NeedByDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.NeedByDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NeedByDate, "", new { @class = "text-danger" })
+                    <div class='input-group date' id='datepicker2' style="width:280px">
+                        @Html.EditorFor(model => model.NeedByDate, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
             </div>
+
 
             <div class="form-group">
                 @Html.LabelFor(model => model.TermsCode, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -149,10 +161,10 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TotalLine, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.TotalLine, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TotalLine, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -212,7 +224,7 @@
                     @Html.DisplayNameFor(model => model.OrderDetailList[0].PartNum)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.OrderDetailList[0].PartNum)
+                    @Html.DisplayNameFor(model => model.OrderDetailList[0].PartDescription)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.OrderDetailList[0].Reference)
@@ -236,7 +248,7 @@
                         @Html.DisplayFor(modelItem => item.PartNum)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PartNum)
+                        @Html.DisplayFor(modelItem => item.PartDescription)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Reference)
@@ -260,7 +272,7 @@
                     <strong>Total Orden</strong>
                 </td>
                 <td>
-                    <strong>@Html.DisplayFor(modelItem => Model.Total)</strong>
+                    <strong>@Html.DisplayFor(modelItem => Model.TotalLine)</strong>
                 </td>
             </tr>
 
@@ -285,7 +297,7 @@
                             $.each(contacts, function (i, contact) {
                                 $("#ContactId").append('<option value="'
                                     + contact.ContactId + '">'
-                                    + contact.Name + '</option>');
+                                    + contact.ConNum + '</option>');
                             });
                         },
                     });
@@ -313,4 +325,24 @@
                     }
                 });
             </Script>
+
+
+
+<script type="text/javascript">
+             $(function () {
+                 $('#datepicker').datetimepicker({ format: 'DD/MM/YYYY HH:mm:ss' });
+                 $('#datepicker').prop("SetDate", Date.now);
+             });
+</script>
+
+
+<script type="text/javascript">
+             $(function () {
+                 $('#datepicker2').datetimepicker({ format: 'DD/MM/YYYY HH:mm:ss' });
+                 $('#datepicker2').prop("setDate", Date.now);
+             });
+</script>
+
+
+
 }

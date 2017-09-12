@@ -60,6 +60,7 @@ namespace NutraBioticsBackend.Models
                             OrderQty = detail.OrderQty,
                             OrderNum = orderHeader.OrderNum,
                             PartId = detail.PartId,
+                            PartDescription = detail.PartDescription,
                             PartNum = detail.PartNum,
                             PriceListPartId = detail.PriceListPartId,
                             SalesOrderHeaderId = orderHeader.SalesOrderHeaderId,
@@ -88,10 +89,8 @@ namespace NutraBioticsBackend.Models
 
         public static void CreateNewOrderNew(NewOrderView view)
         {
-
             db.NewOrderView.Add(view);
             db.SaveChanges();
-
         }
 
         public static void UpdateNiewOrderView(NewOrderView view)

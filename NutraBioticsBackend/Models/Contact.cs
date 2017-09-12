@@ -15,16 +15,17 @@
 
         public string RowMod { get; set; }
 
+        [Display(Name = "Persona Contacto")]
+        public int PerConID { get; set; }
+
         [Required(AllowEmptyStrings = true)]
         public string PagerNum { get; set; }
 
         [Editable(false)]
         public int ShipToId { get; set; }
 
-
         [Editable(false)]
         public string ShipToNum { get; set; }  //Epicor
-
 
         [Editable(false)]
         public int CustNum { get; set; } //epicor

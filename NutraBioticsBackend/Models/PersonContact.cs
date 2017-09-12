@@ -21,6 +21,8 @@ namespace NutraBioticsBackend.Models
 
         public string LastName { get; set; }
 
+        public string Country { get; set; }
+
         public string PhoneNum { get; set; }
 
         public string EMailAddress { get; set; }

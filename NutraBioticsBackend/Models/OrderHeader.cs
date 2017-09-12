@@ -36,6 +36,14 @@
         [Display(Name = "Credito Retenido")]
         public bool CreditHold { get; set; }
 
+        [Editable(false)]
+        [Display(Name = "Embarcada")]
+        public bool ShipMent { get; set; }
+
+        [Editable(false)]
+        [Display(Name = "Facturada")]
+        public bool Invoiced { get; set; }
+
         [Display(Name = "Fecha Orden")]
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
@@ -75,6 +83,15 @@
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Total
         {
+            get;set;
+
+        }
+
+        [Display(Name = "Total")]
+        [Editable(false)]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
+        public decimal TotalLine
+        {
             get
             {
                 if (OrderDetailList == null)
@@ -84,11 +101,9 @@
 
                 return OrderDetailList.Sum(od => od.Total);
             }
-            set
-            {
-            }
+        
         }
-        [Display(Name = "Sincronizado Epicor")]
+    [Display(Name = "Sincronizado Epicor")]
         public bool SincronizadoEpicor { get; set; }
 
         [Required(ErrorMessage = "Debe seleccionar una sucursal")]

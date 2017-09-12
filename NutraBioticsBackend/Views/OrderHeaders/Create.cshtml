@@ -4,6 +4,8 @@
     ViewBag.Title = "Create";
 }
 
+  
+
 <h2>Crear Orden</h2>
 
 
@@ -15,7 +17,8 @@
         <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="col-md-6">
+
+        <div class="col-md-5">
             <div class="form-group">
                 @Html.LabelFor(model => model.SalesOrderHeaderId, "", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -49,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class='input-group date' id='FechaOrden' style="width:280px">
@@ -60,29 +63,46 @@
                     </div>
                     @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                 </div>
+            </div>*@
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class='input-group date' id='datepicker' style="width:280px">
+                        @Html.EditorFor(model => model.Date , new { htmlAttributes = new { @class = "form-control" } })
+                    
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    
+                </div>
             </div>
+
 
             <div class="form-group">
                 @Html.LabelFor(model => model.NeedByDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <div class='input-group date' id='FechaNecesidad' style="width:280px">
+                    <div class='input-group date' id='datepicker2' style="width:280px">
                         @Html.EditorFor(model => model.NeedByDate, new { htmlAttributes = new { @class = "form-control" } })
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    @Html.ValidationMessageFor(model => model.NeedByDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.TermsCode, "TermsCode", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TermsCode, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control", id = "TermsCode" } })
-                    @Html.ValidationMessageFor(model => model.TermsCode, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TermsCode, "TermsCode", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TermsCode, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control", id = "TermsCode" } })
+                        @Html.ValidationMessageFor(model => model.TermsCode, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
+
         <div class="col-md-6">
             <div class="form-group">
                 @Html.LabelFor(model => model.ShipToId, "ShipTo", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -92,13 +112,28 @@
                 </div>
             </div>
 
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.ShipToName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ShipToName, new { htmlAttributes = new {@id = "ShipToName", @class = "form-control" } })
+                </div>
+            </div>*@
+
+
             <div class="form-group">
                 @Html.LabelFor(model => model.ContactId, "Contacto", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("ContactId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("ContactId", null, htmlAttributes: new {@class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ContactId, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @id = "Name", @class = "form-control" } })
+                </div>
+            </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Observations, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -117,10 +152,10 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TotalValue, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.TotalValue, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TotalValue, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -133,6 +168,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.PriceListId, "Lista Precio", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -140,6 +176,8 @@
                     @Html.ValidationMessageFor(model => model.PriceListId, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            <input type="submit" value="Guardar" formmethod="post" class="btn btn-success" />
         </div>
 
 
@@ -185,7 +223,6 @@
 
         <div class="form-group">
             <div class="col-md-offset-0 col-md-10">
-                <input type="submit" value="Guardar" formmethod="post" class="btn btn-success" />
                 @*@Html.ActionLink("Agregar Producto", "AddProduct", new { PriceListId = Model.PriceListId, SalesOrderHeaderId=Model.SalesOrderHeaderId, CustomerId=Model.CustomerId, ShipToId=Model.ShipToId, ContactId=Model.ContactId, Date=Model.Date, NeedByDate=Model.NeedByDate, Observations=Model.Observations })*@
                 @Html.ActionLink("Agregar Producto", "AddProduct", "OrderHeaders", null, new { @id = "SubmitAddProduct", @class = "btn btn-warning" })
             </div>
@@ -269,6 +306,7 @@ else
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
     <script type="text/javascript">
     $("#CreditHold").prop('disabled', true);
     $("#SincronizadoEpicor").prop('disabled', true);
@@ -329,7 +367,7 @@ else
                                     $.each(shiptoes, function (i, shipto) {
                                         $("#ShipToId").append('<option value="'
                                             + shipto.ShipToId + '">'
-                                            + shipto.ShipToName + '</option>');
+                                            + shipto.ShipToNum + '</option>');
                                     });
                                 },
                             });
@@ -388,6 +426,27 @@ else
                             });*@
                             return false;
                 })
+
+
+                   $("#ShipToId").change(function ()
+                {
+                            $("#ShipToName").empty();
+                            $.ajax({
+                                url: '@Url.Action("GetShipToeData")',
+                                dataType: 'json',
+                                data: { ShipToId: $("#ShipToId").val() },
+                                success: function (shiptoes) {
+                                    $.each(shiptoes, function (i, shipto) {
+                                        $("#ShipToName").prop("value", shipto.ShipToName);
+                                    });
+                                },
+                            });
+                            return false;
+                        })
+
+
+
+
                 $("#ShipToId").change(function ()
                 {
                             $("#ContactId").empty();
@@ -400,12 +459,53 @@ else
                                     $.each(contacts, function (i, contact) {
                                         $("#ContactId").append('<option value="'
                                             + contact.ContactId + '">'
-                                            + contact.Name + '</option>');
+                                            + contact.ConNum + '</option>');
+                                    });
+                                },
+                            });
+                            return false;
+                   })
+
+
+
+                      $("#ContactId").click(function ()
+                {
+                            $("#Name").empty();
+                            $.ajax({
+                                type: 'POST',
+                                url: '@Url.Action("GetContactData")',
+                                dataType: 'json',
+                                data: { ContactId: $("#ContactId").val() },
+                                success: function (contacts) {
+                                    $.each(contacts, function (i, contact) {
+                                         $("#Name").prop("value", contact.Name);
                                     });
                                 },
                             });
                             return false;
                         })
+
+
+                  $("#ContactId").change(function ()
+                {
+                            $("#Name").empty();
+                            $.ajax({
+                                type: 'POST',
+                                url: '@Url.Action("GetContactData")',
+                                dataType: 'json',
+                                data: { ContactId: $("#ContactId").val() },
+                                success: function (contacts) {
+                                    $.each(contacts, function (i, contact) {
+                                         $("#Name").prop("value", contact.Name);
+                                    });
+                                },
+                            });
+                            return false;
+                   })
+
+
+
+
                 @*$("#PriceListId").change(function ()
                 {
                         $("#PartId").empty();
@@ -445,6 +545,23 @@ else
             }
         );
     </script>
+
+<script type="text/javascript">
+        $(function () {
+            $('#datepicker').datetimepicker({ format: 'DD/MM/YYYY HH:mm:ss' });
+            $('#datepicker').prop("SetDate", Date.now);
+        });
+</script>
+
+
+<script type="text/javascript">
+        $(function () {
+            $('#datepicker2').datetimepicker({ format: 'DD/MM/YYYY HH:mm:ss' });
+            $('#datepicker2').prop("setDate", Date.now);
+        });
+</script>
+
+
     @*<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>*@
 }

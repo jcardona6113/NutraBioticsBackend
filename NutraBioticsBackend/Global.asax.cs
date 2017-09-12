@@ -5,7 +5,9 @@ using NutraBioticsBackend.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
@@ -20,7 +22,6 @@ namespace NutraBioticsBackend
 
         protected void Application_Start()
         {
-
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<Models.DataContext, Migrations.Configuration>());
             CheckRolesAndSuperUser();
 

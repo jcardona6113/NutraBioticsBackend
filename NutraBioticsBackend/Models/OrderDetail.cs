@@ -33,6 +33,10 @@
         [Display(Name = "Parte")]
         public string PartNum { get; set; }
 
+        [Required(AllowEmptyStrings = true)]
+        [Display(Name = "Descripcion")]
+        public string PartDescription { get; set; }
+
         [Display(Name = "Cantidad")]
         public decimal OrderQty { get; set; }
 

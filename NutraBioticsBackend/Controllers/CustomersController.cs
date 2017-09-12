@@ -11,7 +11,7 @@ using PagedList;
 
 namespace NutraBioticsBackend.Controllers
 {
-    [Authorize(Roles = "User")]
+    //Authorize(Roles = "User")]
     public class CustomersController : Controller
     {
         public DataContext db = new DataContext();
@@ -443,8 +443,11 @@ namespace NutraBioticsBackend.Controllers
         // GET: Contacts/Create
         public ActionResult CreateContact(int id)
         {
+            ViewBag.PerConID = new SelectList(db.PersonContacts, "PerConID", "Name");
             ViewBag.ShipToId = new SelectList(db.ShipToes.Where(s => s.ShipToId == id), "ShipToId", "ShipToNum", id);
             ViewBag.CountryId = new SelectList(CombosHelper.GetCountry(), "CountryId", "Description");
+
+
             return View();
         }
 
@@ -492,6 +495,8 @@ namespace NutraBioticsBackend.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.PerConID = new SelectList(db.PersonContacts, "PerConID", "Name", contact.PerConID);
             ViewBag.ShipToId = new SelectList(db.ShipToes.Where(s => s.ShipToId == contact.ShipToId), "ShipToId", "ShipToNum", contact.ShipToId);
             ViewBag.CountryId = new SelectList(CombosHelper.GetCountry(), "CountryId", "Description", contact.CountryId);
             return View(contact);

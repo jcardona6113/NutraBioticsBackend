@@ -2352,13 +2352,13 @@ textarea.input-lg {
 .btn-Nutra {
     color: #ffffff;
     background-color: #35194b;
-    border-color: #eea236;
+    border-color: #35194b;
 }
 
     .btn-Nutra:hover {
         color: #ffffff;
         background-color: #662d91;
-        border-color: #eea236;
+        border-color: #35194b;
     }
     .btn-Nutra:focus,
     .btn-Nutra:active,

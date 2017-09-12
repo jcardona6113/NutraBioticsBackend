@@ -161,6 +161,8 @@ namespace NutraBioticsBackend.Controllers.API
                                     Country = shipto.Country,
                                     Name = shipto.ShipToName,
                                     PhoneNum = shipto.PhoneNum,
+                                    PerConID = 0,
+                                    PagerNum = "",
                                     ConNum = 1,
                                     ShipToNum = shipto.ShipToNum,
                                     ShipToId = shipto.ShipToId,
@@ -208,7 +210,10 @@ namespace NutraBioticsBackend.Controllers.API
                             RowMod = order.RowMod,
                             Total = order.Total,
                             VendorId = order.VendorId,
-                            Platform=order.Platform,
+                            Platform = order.Platform,
+                            PriceListId = 0,
+                            Invoiced = false,
+                            ShipMent = false,
                             SalesOrderHeaderInterId = order.SalesOrderHeaderInterId
                         };
 
@@ -244,7 +249,8 @@ namespace NutraBioticsBackend.Controllers.API
                                 TaxAmt = detail.TaxAmt,
                                 UnitPrice = detail.UnitPrice,
                                 Reference = detail.Reference,
-                                Total = detail.Total
+                                Total = detail.Total,
+                                PartDescription = "",
                             };
 
                             db.OrderDetails.Add(orderDetail);

@@ -56,7 +56,11 @@
 
         [Required(ErrorMessage = "Debe seleccionar un Contacto")]
         [Display(Name = "Numero Contacto")]
-        public int ConNum { get; set; }   //Epicor       
+        public int ConNum { get; set; }   //Epicor   
+
+        [Required(AllowEmptyStrings = true)]
+        [Display(Name = "Contacto")]
+        public string Name { get; set; }
 
         public string SalesCategory { get; set; }
 
@@ -68,13 +72,17 @@
         public decimal TaxAmt { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
-        public decimal Total { get { return OrderDetails == null ? 0 : OrderDetails.Sum(d => d.Total); } }
+        public decimal Total { get; set; }
 
         [Display(Name = "Sincronizado Epicor")]
         public bool SincronizadoEpicor { get; set; }
 
         [Required(ErrorMessage = "Debe seleccionar una sucursal")]
         public string ShipToNum { get; set; }
+
+        [Display(Name = "Nombre ShipTo")]
+        [Required(AllowEmptyStrings = true)]
+        public string ShipToName { get; set; }
 
         public string RowMod { get; set; }  //D:DElete U:Update C:Create
 
@@ -96,7 +104,7 @@
         public decimal UnitPrice { get; set; }
 
         public List<OrderDetailTmp> OrderDetails { get; set; }
- 
+        [Display(Name = "Total")]
         [DisplayFormat(DataFormatString ="{0:C2}",ApplyFormatInEditMode =false)]  
         public decimal TotalValue
         {

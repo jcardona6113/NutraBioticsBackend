@@ -178,7 +178,7 @@
            columns.Add(c => c.Email).Titled("Email").SetWidth(110).Filterable(true).Sortable(true);
 
            columns.Add().Encoded(false).Sanitized(false).SetWidth(5)
-           .RenderValueAs(o => @Html.ActionLink("Editar", "EditContact", new { id = o.ShipToId }, new { @class = "btn btn-Nutra" }));
+           .RenderValueAs(o => @Html.ActionLink("Editar", "EditContact", new { id = o.ContactId }, new { @class = "btn btn-Nutra" }));
 
            columns.Add().Encoded(false).Sanitized(false).SetWidth(5)
        .RenderValueAs(o => @Html.ActionLink("Borrar", "DeleteContact", new { id = o.ShipToId }));
