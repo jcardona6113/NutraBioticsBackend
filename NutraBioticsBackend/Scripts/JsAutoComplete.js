@@ -62,6 +62,24 @@ $(document).ready(function () {
 })
 
 
+$(document).ready(function () {
+    $("#btnClear").click(function () {
+        $("#cedulaSH").empty();
+        $("#CustomerId").prop("value", 0);
+        $("#sID").empty();
+        $("#ContactId").empty();
+        $("#PriceListId").empty();
+        $("#PartId").empty();
+    })
+    return false;
+})
+
+
+
+
+
+
+
 
 
 $(document).ready(function () { 

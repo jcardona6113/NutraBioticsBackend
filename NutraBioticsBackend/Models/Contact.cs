@@ -8,16 +8,18 @@
     {
 
         [Key]
+        [Display(Name = "Medico")]
         public int ContactId { get; set; }
 
-        [Display(Name = "Numero Contacto")]
+        [Display(Name = "Numero Medico")]
         public int ConNum { get; set; }   //Epicor
 
         public string RowMod { get; set; }
 
-        [Display(Name = "Persona Contacto")]
+        [Display(Name = "Cedula Medico")]
         public int PerConID { get; set; }
 
+        [Display(Name = "Cedula Rep.")]
         [Required(AllowEmptyStrings = true)]
         public string PagerNum { get; set; }
 
@@ -33,7 +35,7 @@
         [Display(Name = "Compañia")]
         public string Company { get; set; }
 
-        [Display(Name = "Nombre Contacto")]
+        [Display(Name = "Medico")]
         public string Name { get; set; }
 
         [Display(Name = "Pais")]

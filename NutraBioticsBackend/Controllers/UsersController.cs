@@ -75,18 +75,6 @@ namespace NutraBioticsBackend.Controllers
                         //Violation of primary key/Unique constraint can be handled here. Also you may //check if Exception Message contains the constraint Name 
                     }
                 }
-                // var useres = await db.Users
-                //.Where(c => c.VendorId == user.VendorId)
-                //.ToListAsync();
-
-                //if(useres==null)
-                //{
-
-                //}
-                //else
-                //{
-                // MOstrar mensaje
-                //}
             }
 
             ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "Name", user.CompanyId);

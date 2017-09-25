@@ -7,7 +7,7 @@
     public class Customer
     {
         [Key]
-        [Display(Name = "Cliente")]
+        [Display(Name = "Cliente POS")]
         public int CustomerId { get; set; }
 
         public string CustId { get; set; }   //epicor

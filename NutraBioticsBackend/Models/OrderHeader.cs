@@ -57,7 +57,7 @@
         public string TermsCode { get; set; }
 
         // [Required(ErrorMessage = "Debe seleccionar una sucursal")]
-        [Display(Name = "Ship To")]
+        [Display(Name = "Paciente")]
         public int ShipToId { get; set; }
 
         // [Required(ErrorMessage = "Debe seleccionar un Contacto")]
@@ -71,7 +71,7 @@
         public string SalesCategory { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Observaciones")]
+        [Display(Name = "Comentarios")]
         public string Observations { get; set; }
 
         [Editable(false)]

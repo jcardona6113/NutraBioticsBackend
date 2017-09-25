@@ -23,11 +23,11 @@
 
     columns.Add(c => c.CustomerId).Titled("ID").SetWidth(110).Sortable(true);
 
-    columns.Add(c => c.CustNum).Titled("CustNum").SetWidth(110);
+    columns.Add(c => c.CustNum).Titled("Numero Cliente").SetWidth(110);
 
     columns.Add(c => c.Names).Titled("Nombres").Filterable(true).SetInitialFilter(GridMvc.Filtering.GridFilterType.Contains, "Ventas POS");
 
-    columns.Add(c => c.ShipViaCode).Titled("ShipViaCode").SetWidth(110);
+    columns.Add(c => c.ShipViaCode).Titled("Codigo Forma de Envio").SetWidth(110);
 
     columns.Add(c => c.Country).Titled("Pais").SetWidth(110);
 
@@ -36,7 +36,7 @@
     columns.Add(c => c.City).Titled("Ciudad").SetWidth(110);
 
     columns.Add().Encoded(false).Sanitized(false).SetWidth(30)
-        .RenderValueAs(o => @Html.ActionLink("Details", "Details", new { id = o.CustomerId }, new { @class = "btn btn-Nutra" }));
+        .RenderValueAs(o => @Html.ActionLink("Detalle", "Details", new { id = o.CustomerId }, new { @class = "btn btn-Nutra" }));
 
 
 }).WithPaging(20)

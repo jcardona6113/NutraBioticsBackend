@@ -24,7 +24,7 @@
         public int VendorId { get; set; }
 
         [Required(ErrorMessage = "Debe seleccionar un Cliente")]
-        [Display(Name = "Cliente")]
+        [Display(Name = "Cliente POS")]
         public int CustomerId { get; set; }
 
         [Display(Name = "Cliente Id")]
@@ -65,7 +65,7 @@
         public string SalesCategory { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Observaciones")]
+        [Display(Name = "Comentarios")]
         public string Observations { get; set; }
 
         [Display(Name = "Impuesto")]

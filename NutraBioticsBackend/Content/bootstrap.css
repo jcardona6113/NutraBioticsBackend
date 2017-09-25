@@ -2349,6 +2349,58 @@ textarea.input-lg {
     }
 
 
+
+.btn-limpiar  {
+    color: #ffffff;
+    background-color: #35194b;
+    border-color: #35194b;
+}
+
+.btn-limpiar :hover {
+    color: #ffffff;
+    background-color: #662d91;
+    border-color: #35194b;
+}
+
+.btn-limpiar :focus,
+.btn-limpiar :active,
+.btn-limpiar .active,
+.open .dropdown-toggle.btn-limpiar  {
+    color: #ffffff;
+    background-color: #35194b;
+    border-color: #d58512;
+}
+
+.btn-limpiar :active,
+.btn-limpiar .active,
+.open .dropdown-toggle.btn-limpiar  {
+    background-image: none;
+}
+
+.btn-limpiar .disabled,
+.btn-limpiar [disabled],
+fieldset[disabled] .btn-limpiar ,
+.btn-limpiar .disabled:hover,
+.btn-limpiar [disabled]:hover,
+fieldset[disabled] .btn-limpiar :hover,
+.btn-limpiar .disabled:focus,
+.btn-limpiar [disabled]:focus,
+fieldset[disabled] .btn-limpiar :focus,
+.btn-limpiar .disabled:active,
+.btn-limpiar [disabled]:active,
+fieldset[disabled] .btn-limpiar :active,
+.btn-limpiar .disabled.active,
+.btn-limpiar [disabled].active,
+fieldset[disabled] .btn-limpiar .active {
+    background-color: #35194b;
+    border-color: #eea236;
+}
+
+
+
+
+
+
 .btn-Nutra {
     color: #ffffff;
     background-color: #35194b;

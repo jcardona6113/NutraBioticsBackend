@@ -24,14 +24,14 @@
 
 
         <div class="form-group">
-            @Html.Label("PerConID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Numero Medico", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PerConID, new { htmlAttributes = new { @id = "perid", @class = "form-control" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.Label("PersonContact", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Medico", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("PerConID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PerConID, "", new { @class = "text-danger" })
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ShipToId, "ShipToId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ShipToId, "Paciente", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ShipToId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ShipToId, "", new { @class = "text-danger" })
@@ -48,7 +48,7 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PagerNum, "PagerNum", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PagerNum, "Cedula Rep.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model=> model.PagerNum, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PagerNum, "", new { @class = "text-danger" })

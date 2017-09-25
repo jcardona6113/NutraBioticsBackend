@@ -23,9 +23,9 @@
 
     columns.Add(o => o.Customer.Names).Titled("Nombres").SetWidth(110).Sortable(true).Filterable(true);
 
-    columns.Add(o => o.ShipToNum).Titled("ShipToNum").SetWidth(110).Filterable(true).Sortable(true);
+    columns.Add(o => o.ShipToNum).Titled("Cedula Paciente").SetWidth(110).Filterable(true).Sortable(true);
 
-    columns.Add(o => o.ShipTo.ShipToName).Titled("ShipToName").SetWidth(110).Sortable(true).Filterable(true);
+    columns.Add(o => o.ShipTo.ShipToName).Titled("Paciente").SetWidth(110).Sortable(true).Filterable(true);
 
     // columns.Add(o => o.Contact.ConNum).Titled("ConNum").SetWidth(110).Sortable(true).Filterable(true);
 
@@ -37,7 +37,7 @@
 
     //columns.Add(o => o.TermsCode).Titled("Terminos").SetWidth(110).Sortable(true).Filterable(true);
 
-    columns.Add(o => o.Observations).Titled("Observaciones").SetWidth(110).Sortable(true).Filterable(true);
+    columns.Add(o => o.Observations).Titled("Comentarios").SetWidth(110).Sortable(true).Filterable(true);
 
     columns.Add(o => o.TaxAmt).Titled("Iva").SetWidth(110).Sortable(true).Filterable(true);
 

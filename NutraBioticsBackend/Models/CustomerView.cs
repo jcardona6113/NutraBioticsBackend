@@ -15,6 +15,7 @@ namespace NutraBioticsBackend.Models
 
         public string CustId { get; set; }   //epicor
 
+        [Display(Name = "Numero Cliente")]
         public int CustNum { get; set; }    //epicor
 
 
@@ -43,6 +44,7 @@ namespace NutraBioticsBackend.Models
 
         public string PhoneNum { get; set; }
 
+        [Display(Name = "Cliente POS")]
         public string Names { get; set; }
 
         public string LastNames { get; set; }
