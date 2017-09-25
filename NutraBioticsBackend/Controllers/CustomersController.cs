@@ -262,7 +262,7 @@ namespace NutraBioticsBackend.Controllers
 
         public ActionResult CreateShipTo(int id)
         {
-            ViewBag.CustomerId = new SelectList(db.Customers.Where(c => c.VendorId == sessionVendorID), "CustomerId", "Names", id);
+            ViewBag.CustomerId = new SelectList(db.Customers.Where(c => c.VendorId == sessionVendorID && c.CustomerId == id), "CustomerId", "Names", id);
             ViewBag.CountryId = new SelectList(CombosHelper.GetCountry(), "CountryId", "Description");
             ViewBag.TerritoryEpicorId = new SelectList(CombosHelper.GetTerritory(), "TerritoryEpicorId", "TerritoryDesc");
 
@@ -365,6 +365,8 @@ namespace NutraBioticsBackend.Controllers
                 var customer = db.Customers.Where(c => c.CustomerId == shipTo.CustomerId).FirstOrDefault();
                 shipTo.CustNum = customer.CustNum;
 
+                shipTo.SincronizadoEpicor = false;
+
                 //Uso de variables de Session
                 shipTo.VendorId = sessionVendorID;
                 shipTo.Company = System.Web.HttpContext.Current.Session["Company"].ToString();
@@ -420,6 +422,7 @@ namespace NutraBioticsBackend.Controllers
         {
             ShipTo shipTo = db.ShipToes.Find(id);
             shipTo.RowMod = "D";
+            shipTo.SincronizadoEpicor = false;
             db.Entry(shipTo).State = EntityState.Modified;
             try
             {
@@ -441,13 +444,14 @@ namespace NutraBioticsBackend.Controllers
         #region Contactos
 
         // GET: Contacts/Create
-        public ActionResult CreateContact(int id)
+        public ActionResult CreateContact(int? id)
         {
+       
             ViewBag.PerConID = new SelectList(db.PersonContacts, "PerConID", "Name");
-            ViewBag.ShipToId = new SelectList(db.ShipToes.Where(s => s.ShipToId == id), "ShipToId", "ShipToNum", id);
+            ViewBag.ShipToId = new SelectList(db.ShipToes.Where(s => s.ShipToId == id), "ShipToId", "ShipToName", id);
             ViewBag.CountryId = new SelectList(CombosHelper.GetCountry(), "CountryId", "Description");
 
-
+            
             return View();
         }
 
@@ -460,13 +464,50 @@ namespace NutraBioticsBackend.Controllers
         {
             if (ModelState.IsValid)
             {
-                var country = db.Countries.Find(contact.CountryId);
-                contact.Country = country.Description;
+
+                if (contact.Country != null)
+                {
+                    var country = db.Countries.Find(contact.CountryId);
+                    contact.Country = country.Description;
+                }
+                else
+                {
+                    contact.Country = "Colombia";
+                }
+
+                   var percon = db.PersonContacts.Where(s => s.PerConID == contact.PerConID).FirstOrDefault();
+
+                    //contact.Name = percon.Name;
+                    //contact.Address = percon.Address1;
+                    //contact.Email = percon.EMailAddress;
+                    //contact.City = percon.City;
+                    //contact.State = percon.State;
+                
 
                 var shipto = db.ShipToes.Where(s => s.ShipToId == contact.ShipToId).FirstOrDefault();
                 contact.CustNum = shipto.CustNum;
                 contact.ShipToNum = shipto.ShipToNum;
 
+
+                var UltimoRegistro = db
+                .Contacts
+                .OrderByDescending(c => c.ConNum)
+                .Where(c => c.ShipToId == contact.ShipToId)
+                .FirstOrDefault();
+
+                if (UltimoRegistro == null)
+                {
+                    var UltimoContacto = new Contact
+                    {
+                        ConNum = 1,
+                    };
+
+                    contact.ConNum = UltimoContacto.ConNum;
+                }
+                else
+                {
+                    contact.ConNum = UltimoRegistro.ConNum + 1;
+                }
 
                 //Uso de variables de Session
                 contact.VendorId = sessionVendorID;
@@ -497,7 +538,7 @@ namespace NutraBioticsBackend.Controllers
             }
 
             ViewBag.PerConID = new SelectList(db.PersonContacts, "PerConID", "Name", contact.PerConID);
-            ViewBag.ShipToId = new SelectList(db.ShipToes.Where(s => s.ShipToId == contact.ShipToId), "ShipToId", "ShipToNum", contact.ShipToId);
+            ViewBag.ShipToId = new SelectList(db.ShipToes.Where(s => s.ShipToId == contact.ShipToId), "ShipToId", "ShipToName", contact.ShipToId);
             ViewBag.CountryId = new SelectList(CombosHelper.GetCountry(), "CountryId", "Description", contact.CountryId);
             return View(contact);
         }
@@ -512,8 +553,35 @@ namespace NutraBioticsBackend.Controllers
             if (ModelState.IsValid)
             {
 
-                var country = db.Countries.Find(contact.CountryId);
-                contact.Country = country.Description;
+                if (contact.Country != null)
+                {
+                    var country = db.Countries.Find(contact.CountryId);
+                    contact.Country = country.Description;
+                }
+                else
+                {
+                    contact.Country = "Colombia";
+                }
+
+                //var percon = db.PersonContacts.Where(s => s.PerConID == contact.PerConID).FirstOrDefault();
+                //contact.Name = percon.Name;
+
+               // var UltimoRegistro = db
+               //.Contacts
+               //.OrderByDescending(c => c.ConNum)
+               //.Where(c => c.ShipToId == contact.ShipToId)
+               //.FirstOrDefault();
+
+                //var contactNUM = db.Contacts.Where(c => c.ContactId == contact.ContactId).FirstOrDefault();
+
+                //contact.ConNum = contactNUM.ConNum;
+                //contact.Name = percon.Name;
+                //contact.Address = percon.Address1;
+                //contact.Email = percon.EMailAddress;
+                //contact.City = percon.City;
+                //contact.State = percon.State;
+
+                contact.SincronizadoEpicor = false;
 
                 //Uso de variables de Session
                 contact.VendorId = sessionVendorID;
@@ -556,6 +624,7 @@ namespace NutraBioticsBackend.Controllers
         {
             Contact contact = db.Contacts.Find(id);
             contact.RowMod = "D";
+            contact.SincronizadoEpicor = false;
             db.Entry(contact).State = EntityState.Modified;
             // db.Contacts.Remove(contact);
             try
@@ -570,6 +639,57 @@ namespace NutraBioticsBackend.Controllers
         }
 
         #endregion
+
+        public JsonResult PerConIDAutoComplete(int Prefix)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var personcontacts = db.PersonContacts.ToList();
+
+
+            //Searching records from list using LINQ query  
+            var PersonContact = (from N in personcontacts
+                                 where N.PerConID.ToString().StartsWith(Prefix.ToString())
+                                 select new { N.PerConID });
+            return Json(PersonContact, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult SelectPerConIDFromTextBox(int PerConId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var perconid = db.PersonContacts.Where(s => s.PerConID == PerConId).FirstOrDefault();
+
+            if (perconid == null)
+            {
+
+                var perconnull = new PersonContact
+                {
+                    PerConID = 999,
+                };
+                return Json(perconnull, JsonRequestBehavior.AllowGet);
+
+            }
+            return Json(perconid, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult GetPersonContactData(int? PerConID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var perconid = db.PersonContacts.Where(s => s.PerConID == PerConID);
+            return Json(perconid, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetContactName(int? PerConID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var name = db.PersonContacts.Where(s => s.PerConID == PerConID).FirstOrDefault();
+            return Json(name.Name, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
 
     }
 }

@@ -102,7 +102,6 @@
                 </div>
             </div>
 
-
             <div class="form-group">
                 @Html.LabelFor(model => model.TermsCode, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -112,6 +111,15 @@
             </div>
     </div>
         <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.Label("ShipToNum", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ShipToNum, new { htmlAttributes = new { @id = "cedulaSH", @class = "form-control" } })
+                </div>
+            </div>
+
+
             <div class="form-group">
                 @Html.LabelFor(model => model.ShipToId, "ShipToId", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -121,7 +129,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ContactId, "ContactId", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Contacto", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("ContactId", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ContactId, "", new { @class = "text-danger" })
@@ -168,7 +176,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.SincronizadoEpicor, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -176,7 +184,7 @@
                         @Html.ValidationMessageFor(model => model.SincronizadoEpicor, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="form-group">
                 @Html.LabelFor(model => model.PriceListId, "Lista Precio", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -202,8 +210,10 @@
             </div>*@
         </div>       
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="col-md-offset-0col-md-10">
+                    
                     <input type="submit" value="Guardar" class="btn btn-success" />
+        
                     @Html.ActionLink("Agregar Producto", "AddProductEdit", "OrderHeaders", null, new { @id = "SubmitAddProduct", @class = "btn btn-warning" })
                 </div>
             </div>
@@ -277,16 +287,21 @@
             </tr>
 
         </table>
+               
     }
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
         <script type="text/javascript">
             {
                 $("#CreditHold").prop('disabled', true);
                 $("#SincronizadoEpicor").prop('disabled', true);
-                $("#ShipToId").change(function () {
+                $("#ShipToId").focusout(function () {
                     $("#ContactId").empty();
                     $.ajax({
                         type: 'POST',
@@ -297,7 +312,7 @@
                             $.each(contacts, function (i, contact) {
                                 $("#ContactId").append('<option value="'
                                     + contact.ContactId + '">'
-                                    + contact.ConNum + '</option>');
+                                    + contact.Name + '</option>');
                             });
                         },
                     });
@@ -319,30 +334,94 @@
                     }
                     else
                     {
-                        @*alert("verifique que haya seleccionado cliente, sucursal, contacto y lista de precio");
+                        @*
                         var path = '@Url.Content("~/OrderHeaders/Edit/"+ SalesOrderHeaderId)'
                         $(this).attr("href", path);*@
                     }
                 });
-            </Script>
+
+
+    $(document).ready(function () {
+    $("#cedulaSH").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("EditAutoComplete")',
+                type: "POST",
+                dataType: "json",
+                data: { CustomerId: $("#CustomerId").val(), Prefix: request.term },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.ShipToNum, value: item.ShipToNum };
+                    }))
+                }
+            })
+        },
+        messages: {
+            noResults: "", results: ""
+        }
+    });
+             })
+
+
+            $(document).ready(function () {
+                $("#ShipToId").change(function () {
+                    $("#cedulaSH").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("GetShipToeData")' ,
+                        dataType: 'json',
+                        data: { ShipToId: $("#ShipToId").val() },
+                        success: function (shiptoes) {
+                            $.each(shiptoes, function (i, shipto) {
+                                $("#cedulaSH").prop("value", shipto.ShipToNum);
+                            });
+                        },
+                    });
+                    return false;
+                })
+            })
+
+
+            $(document).ready(function () {
+                $("#cedulaSH").focusout(function () {
+
+                    $.ajax({
+                        url: '@Url.Action("EditSelectShiptoeFromTextBox")',
+                        dataType: 'json',
+                        type: "POST",
+                        data: { CustomerId: $("#CustomerId").val(), ShipToNum: $("#cedulaSH").val() },
+                        success: function (shipto) {
+                            if (shipto.ShipToNum == "999")
+                            {
+                                alert("No Encontrado");
+                            }
+                            else
+                            {
+                                $("#ShipToId").val(shipto.ShipToId);
+                            }
+                        },
+                        });
+
+                return false;
+                })
+            })
+            
+</script>
 
 
 
 <script type="text/javascript">
              $(function () {
-                 $('#datepicker').datetimepicker({ format: 'DD/MM/YYYY HH:mm:ss' });
-                 $('#datepicker').prop("SetDate", Date.now);
+                 $('#datepicker').datetimepicker({ format: 'MM-DD-YYYY HH:mm:ss' });
              });
 </script>
 
 
 <script type="text/javascript">
              $(function () {
-                 $('#datepicker2').datetimepicker({ format: 'DD/MM/YYYY HH:mm:ss' });
-                 $('#datepicker2').prop("setDate", Date.now);
+                 $('#datepicker2').datetimepicker({ format: 'MM-DD-YYYY HH:mm:ss' });
              });
 </script>
-
 
 
 }

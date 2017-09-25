@@ -19,6 +19,7 @@ namespace NutraBioticsBackend
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/moment.js",
                         "~/Scripts/bootstrap.js",
@@ -29,6 +30,7 @@ namespace NutraBioticsBackend
                         "~/Content/bootstrap.css",
                         "~/Content/site.css",
                         "~/Content/bootstrap-datetimepicker.css"));
+
 
 
         }

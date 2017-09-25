@@ -25,7 +25,7 @@
 
     columns.Add(c => c.CustNum).Titled("CustNum").SetWidth(110);
 
-    columns.Add(c => c.Names).Titled("Nombres").SetWidth(110).Filterable(true).Sortable(true);
+    columns.Add(c => c.Names).Titled("Nombres").Filterable(true).SetInitialFilter(GridMvc.Filtering.GridFilterType.Contains, "Ventas POS");
 
     columns.Add(c => c.ShipViaCode).Titled("ShipViaCode").SetWidth(110);
 
@@ -45,8 +45,9 @@
 @section Scripts {
 @Scripts.Render("~/bundles/jqueryval")
 
-<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+@*<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>*@
 <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
+
 
 
     }

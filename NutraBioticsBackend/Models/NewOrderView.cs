@@ -69,6 +69,7 @@
         public string Observations { get; set; }
 
         [Display(Name = "Impuesto")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal TaxAmt { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]

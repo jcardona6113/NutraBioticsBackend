@@ -4,10 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-  
-
 <h2>Crear Orden</h2>
-
 
 @using (Html.BeginForm())
 {
@@ -52,31 +49,17 @@
                 </div>
             </div>
 
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class='input-group date' id='FechaOrden' style="width:280px">
-                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-
             <div class="form-group">
                 @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class='input-group date' id='datepicker' style="width:280px">
-                        @Html.EditorFor(model => model.Date , new { htmlAttributes = new { @class = "form-control" } })
-                    
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -94,72 +77,70 @@
             </div>
 
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.TermsCode, "TermsCode", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TermsCode, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control", id = "TermsCode" } })
-                        @Html.ValidationMessageFor(model => model.TermsCode, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TermsCode, "TermsCode", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TermsCode, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control", id = "TermsCode" } })
+                    @Html.ValidationMessageFor(model => model.TermsCode, "", new { @class = "text-danger" })
                 </div>
             </div>
+        </div>
+
 
         <div class="col-md-6">
+
             <div class="form-group">
-                @Html.LabelFor(model => model.ShipToId, "ShipTo", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("ShipToNum", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("ShipToId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ShipToId, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ShipToNum, new { htmlAttributes = new { @id = "cedulaSH", @class = "form-control" } })
                 </div>
             </div>
 
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.ShipToName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ShipToName, new { htmlAttributes = new {@id = "ShipToName", @class = "form-control" } })
+
+                <div class="form-group">
+                    @Html.Label("ShipTo", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ShipToId", null, htmlAttributes: new {@id="sID", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ShipToId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>*@
 
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ContactId, "Contacto", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("ContactId", null, htmlAttributes: new {@class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ContactId, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("Contacto", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ContactId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ContactId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @id = "Name", @class = "form-control" } })
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observations, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Observations, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Observations, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>*@
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Observations, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Observations, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Observations, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TaxAmt, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TaxAmt, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TaxAmt, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.TaxAmt, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TaxAmt, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TaxAmt, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TotalValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TotalValue, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TotalValue, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.TotalValue, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TotalValue, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TotalValue, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
+                @*<div class="form-group">
                 @Html.LabelFor(model => model.SincronizadoEpicor, htmlAttributes: new { @readonly = "readonly", @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -167,67 +148,27 @@
                         @Html.ValidationMessageFor(model => model.SincronizadoEpicor, "", new { @disabled = true, @class = "text-danger" })
                     </div>
                 </div>
+            </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PriceListId, "Lista Precio", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("PriceListId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PriceListId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PriceListId, "Lista Precio", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("PriceListId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.PriceListId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <input type="submit" value="Guardar" formmethod="post" class="btn btn-success" />
-        </div>
-
-
-        <div class="form-group2">
-
-            @*<div class="form-group2">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.LabelFor(model => model.PartId, "Parte", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("PartId", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.PriceListId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group2">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.LabelFor(model => model.QTY, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.QTY, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.QTY, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group2">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.LabelFor(model => model.Reference, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Reference, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Reference, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group2">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>*@
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-0 col-md-10">
                 @*@Html.ActionLink("Agregar Producto", "AddProduct", new { PriceListId = Model.PriceListId, SalesOrderHeaderId=Model.SalesOrderHeaderId, CustomerId=Model.CustomerId, ShipToId=Model.ShipToId, ContactId=Model.ContactId, Date=Model.Date, NeedByDate=Model.NeedByDate, Observations=Model.Observations })*@
+                <input type="submit" value="Guardar" formmethod="post" class="btn btn-Nutra" />
                 @Html.ActionLink("Agregar Producto", "AddProduct", "OrderHeaders", null, new { @id = "SubmitAddProduct", @class = "btn btn-warning" })
             </div>
         </div>
-    </div>
+ </div>
 
 }
 <!-- En la vista en lugar del ActionLink un <a /> normal -->
@@ -301,20 +242,25 @@ else
         </tr>
 
     </table>
+
+
 }
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="@Url.Content("~/Scripts/JsAutoComplete.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
     $("#CreditHold").prop('disabled', true);
-    $("#SincronizadoEpicor").prop('disabled', true);
      $('#SubmitAddProduct').click(function () {
             var PriceListId = $('#PriceListId').val();
             var SalesOrderHeaderId = $('#SalesOrderHeaderId').val();
             var CustomerId = $('#CustomerId').val();
-            var ShipToId = $('#ShipToId').val();
+            var ShipToId = $('#sID').val();
             var ContactId = $('#ContactId').val();
             var Date = $('#Date').val();
             var NeedByDate = $('#NeedByDate').val();
@@ -326,38 +272,22 @@ else
             }
             else
             {
-                alert("verifique que haya seleccionado cliente, sucursal, contacto y lista de precio");
+                alert("verifique que haya seleccionado cliente, sucursal, contacto y lista de precios");
                 var path = '@Url.Content("~/OrderHeaders/Create")'
                 $(this).attr("href", path);
             }
         });
-    @*$('#AddProdut').click(function() {
-                $.ajax({
-                    url: '@Url.Action("CreateProducto", "NewOrderView")',
-                    type: 'POST',
-                    cache: false,
-                    data: formContainer.serialize(),
-                    success: function(result) {
-                        var modelStatus = $('.model-status');
-                        if (result) modelStatus.text("Estado: Enviado con éxito");
-                        else modelStatus.text("Estado: Enviado con error. Compruebe que ha rellenado todos los campos");
-                    },
-                    error: function(jqXHR, textStatus, error) {
-                        $('.model-status').text("Estado: Error inesperado");
-                    }
-                });
-            });*@
-        $(document).ready(
 
+        $(document).ready(
             function ()
             {
-
                 $("#CustomerId").change(function ()
                 {
-                            $("#ShipToId").empty();
+                            $("#sID").empty();
                             $("#ContactId").empty();
                             $("#PriceListId").empty();
                             $("#PartId").empty();
+                            $("#cedulaSH").empty();
                             $.ajax({
                                 type: 'POST',
                                 url: '@Url.Action("GetShipToesList")',
@@ -365,9 +295,9 @@ else
                                 data: { CustomerId: $("#CustomerId").val() },
                                 success: function (shiptoes) {
                                     $.each(shiptoes, function (i, shipto) {
-                                        $("#ShipToId").append('<option value="'
+                                        $("#sID").append('<option value="'
                                             + shipto.ShipToId + '">'
-                                            + shipto.ShipToNum + '</option>');
+                                            + shipto.ShipToName + '</option>');
                                     });
                                 },
                             });
@@ -381,23 +311,10 @@ else
                                         $("#TermsCode").attr("value", customer.TermsCode);
                                         $("#CreditHold").prop('checked', customer.CreditHold);
                                         $("#CreditHold").prop('disabled', true);
-                                        $("#SincronizadoEpicor").prop('disabled', true);
                                     });
                                 },
                             });
-                            $.ajax({
-                                type: 'POST',
-                                url: '@Url.Action("GetContactList")',
-                                dataType: 'json',
-                                data: { ShipToId: $("#ShipToId").val() },
-                                success: function (contacts) {
-                                $.each(contacts, function (i, contact) {
-                                    $("#ContactId").append('<option value="'
-                                        + contact.ContactId + '">'
-                                        + contact.Name + '</option>');
-                                });
-                                },
-                            });
+   
                             $.ajax({
                                 type: 'POST',
                                 url: '@Url.Action("GetPriceList")',
@@ -411,157 +328,29 @@ else
                                 });
                                 },
                             });
-                            @*$.ajax({
-                                type: 'POST',
-                                url: '@Url.Action("GetPartlist")',
-                                dataType: 'json',
-                                data: { PriceListId: $("#PriceListId").val() },
-                                success: function (Part) {
-                                    $.each(Part, function (i, part) {
-                                        $("#PartId").append('<option value="'
-                                            + part.PartId + '">'
-                                            + part.PartDescription + '</option>');
-                                    });
-                                },
-                            });*@
+
                             return false;
                 })
 
-
-                   $("#ShipToId").change(function ()
-                {
-                            $("#ShipToName").empty();
-                            $.ajax({
-                                url: '@Url.Action("GetShipToeData")',
-                                dataType: 'json',
-                                data: { ShipToId: $("#ShipToId").val() },
-                                success: function (shiptoes) {
-                                    $.each(shiptoes, function (i, shipto) {
-                                        $("#ShipToName").prop("value", shipto.ShipToName);
-                                    });
-                                },
-                            });
-                            return false;
-                        })
-
-
-
-
-                $("#ShipToId").change(function ()
-                {
-                            $("#ContactId").empty();
-                            $.ajax({
-                                type: 'POST',
-                                url: '@Url.Action("GetContactList")',
-                                dataType: 'json',
-                                data: { ShipToId: $("#ShipToId").val() },
-                                success: function (contacts) {
-                                    $.each(contacts, function (i, contact) {
-                                        $("#ContactId").append('<option value="'
-                                            + contact.ContactId + '">'
-                                            + contact.ConNum + '</option>');
-                                    });
-                                },
-                            });
-                            return false;
-                   })
-
-
-
-                      $("#ContactId").click(function ()
-                {
-                            $("#Name").empty();
-                            $.ajax({
-                                type: 'POST',
-                                url: '@Url.Action("GetContactData")',
-                                dataType: 'json',
-                                data: { ContactId: $("#ContactId").val() },
-                                success: function (contacts) {
-                                    $.each(contacts, function (i, contact) {
-                                         $("#Name").prop("value", contact.Name);
-                                    });
-                                },
-                            });
-                            return false;
-                        })
-
-
-                  $("#ContactId").change(function ()
-                {
-                            $("#Name").empty();
-                            $.ajax({
-                                type: 'POST',
-                                url: '@Url.Action("GetContactData")',
-                                dataType: 'json',
-                                data: { ContactId: $("#ContactId").val() },
-                                success: function (contacts) {
-                                    $.each(contacts, function (i, contact) {
-                                         $("#Name").prop("value", contact.Name);
-                                    });
-                                },
-                            });
-                            return false;
-                   })
-
-
-
-
-                @*$("#PriceListId").change(function ()
-                {
-                        $("#PartId").empty();
-                           $.ajax({
-                                type: 'POST',
-                                url: '@Url.Action("GetPartlist")',
-                                dataType: 'json',
-                                data: { PriceListId: $("#PriceListId").val() },
-                                success: function (Part) {
-                                    $.each(Part, function (i, part) {
-                                        $("#PartId").append('<option value="'
-                                            + part.PartId + '">'
-                                            + part.PartDescription + '</option>');
-                                    });
-                                },
-                            });
-                            return false;
-                        })
-                $("#PartId").change(function ()
-                {
-                    $("#UnitPrice").empty();
-                        $.ajax({
-                            type: 'POST',
-                            url: '@Url.Action("GetProductPrice")',
-                            dataType: 'json',
-                            data: { PriceListId: $("#PriceListId").val(), PartId: $("#PartId").val() },
-                            success: function (parts) {
-                                $.each(parts, function (i, part) {
-                                    $("#UnitPrice").attr("value", part.BasePrice);
-                                    //$("#UnitPrice").prop('disabled', true);
-                                });
-                            },
-                        });
-                            return false;
-                })*@
-
             }
         );
-    </script>
-
-<script type="text/javascript">
-        $(function () {
-            $('#datepicker').datetimepicker({ format: 'DD/MM/YYYY HH:mm:ss' });
-            $('#datepicker').prop("SetDate", Date.now);
-        });
 </script>
 
-
 <script type="text/javascript">
         $(function () {
-            $('#datepicker2').datetimepicker({ format: 'DD/MM/YYYY HH:mm:ss' });
+            $('#datepicker').datetimepicker({ format: 'MM-DD-YYYY HH:mm:ss' });
             $('#datepicker2').prop("setDate", Date.now);
         });
 </script>
 
 
-    @*<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>*@
+<script type="text/javascript">
+        $(function () {
+            $('#datepicker2').datetimepicker({ format: 'MM-DD-YYYY HH:mm:ss' });
+            $('#datepicker2').prop("setDate", Date.now);
+        });
+</script>
+
+
+
 }

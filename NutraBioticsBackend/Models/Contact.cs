@@ -60,8 +60,8 @@
 
         public bool SincronizadoEpicor { get; set; }
 
-        [JsonIgnore]
-        public virtual ShipTo ShipTo { get; set; }
+        //[JsonIgnore]
+        //public virtual ShipTo ShipTo { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<OrderHeader> OrderHeaders { get; set; }

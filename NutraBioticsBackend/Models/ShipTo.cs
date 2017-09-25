@@ -12,6 +12,7 @@
         [Display(Name = "Cliente")]
         public int CustomerId { get; set; }
 
+     
         public string ShipToNum { get; set; }  //Epicor
 
         [Editable(false)]

@@ -11,13 +11,13 @@
     <h4>Contacto</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.ShipTo.ShipToNum)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ShipTo.ShipToNum)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.ConNum)
@@ -27,13 +27,13 @@
             @Html.DisplayFor(model => model.ConNum)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.ShipToNum)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ShipToNum)
-        </dd>
+        </dd>*@
 
 
         <dt>
@@ -44,7 +44,7 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.CountryId)
         </dt>
 
@@ -90,7 +90,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.Email)
-        </dd>
+        </dd>*@
 
 
     </dl>
@@ -101,7 +101,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Borrar" class="btn btn-Nutra" /> |
-            @Html.ActionLink("Regresar", "Index")
+            @Html.ActionLink("Regresar", "EditShipTo" + "/" + Model.ShipToId);
         </div>
     }
 </div>
