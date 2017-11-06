@@ -1,0 +1,117 @@
+﻿@model IEnumerable<NutraBioticsBackend.Models.InvoiceHeader>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Names)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceAmt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceBal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckSaldo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiasVencimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpenInvoice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Names)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceBal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckSaldo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClosedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiasVencimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpenInvoice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.InvoiceHeaderId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InvoiceHeaderId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InvoiceHeaderId })
+        </td>
+    </tr>
+}
+
+</table>

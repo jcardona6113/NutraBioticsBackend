@@ -31,9 +31,27 @@
                     {
                         <li>@Html.ActionLink("Orden Venta", "Index", "OrderHeaders")</li>
 
+
+                        
+
                         @*<li>@Html.ActionLink("Clientes", "Index", "Customers")</li>*@
 
-                        <li><a href="http://190.85.172.107:27015/Customers/?grid-init=1">Clientes</a></li>
+                <li><a href="http://190.85.172.107:27015/Customers/?grid-init=1">Clientes</a></li>
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cartera<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+
+                        <li>@Html.ActionLink("Busqueda de Facturas", "Search", "InvoiceHeaders1")</li>
+                        @*<li>@Html.ActionLink("Busqueda de Pagos", "Search", "CashHeaders")</li>*@
+                    </ul>
+                </li>
+
+                <li>@Html.ActionLink("Consulta Global Ordenes", "ConsultaOrdenes", "OrderHeaders")</li>
+
+
+
                     }
 
 
@@ -57,7 +75,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - ByTheWave SAS </p>
+            <p align="center">&copy; @DateTime.Now.Year - ByTheWave SAS </p>
         </footer>
     </div>
 

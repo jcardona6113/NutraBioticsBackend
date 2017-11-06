@@ -1,0 +1,105 @@
+﻿@model IEnumerable<NutraBioticsBackend.Models.CashHeader>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HeadNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Posted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TranType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TranAmt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocTranAmt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Custnum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Names)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TranDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppliedAmt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocAppliedAmt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HeadNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Posted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TranType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TranAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocTranAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Custnum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Names)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TranDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppliedAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocAppliedAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CashHeaderId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CashHeaderId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CashHeaderId })
+        </td>
+    </tr>
+}
+
+</table>

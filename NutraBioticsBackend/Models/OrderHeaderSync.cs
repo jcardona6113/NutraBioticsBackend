@@ -16,6 +16,8 @@
 
         public int UserId { get; set; }
 
+        public int InvoiceNum { get; set; }
+
         public int VendorId { get; set; }
 
         public int CustomerId { get; set; }

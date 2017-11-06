@@ -1,6 +1,6 @@
 ﻿@model NutraBioticsBackend.Models.AddproductEditView
 @{
-    ViewBag.Title = "AddProductEdit";
+    ViewBag.Title = "Agregar Producto";
 }
 
 <h2>Adicionar Producto</h2>
@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>OrderDetail</h4>
+        <h4>Detalle de orden</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -23,7 +23,7 @@
             </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PriceListId, htmlAttributes: new { @class = "control-label col-md-2", @visible = false })
+            @Html.LabelFor(model => model.PriceListId, "Lista Precios", htmlAttributes: new { @class = "control-label col-md-2", @visible = false })
             <div class="col-md-10">
                 @Html.DropDownList("PriceListId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PriceListId, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PartId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PartId, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("PartId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PartId, "", new { @class = "text-danger" })
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OrderQty, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.OrderQty, "Cantidad", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.OrderQty, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OrderQty, "", new { @class = "text-danger" })
@@ -64,7 +64,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-0 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
+                <input type="submit" value="Agregar" class="btn btn-Nutra" />
                 @Html.ActionLink("Regresar", "Create")
             </div>
         </div>

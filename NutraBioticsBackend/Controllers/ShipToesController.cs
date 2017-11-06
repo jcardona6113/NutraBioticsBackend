@@ -37,6 +37,7 @@ namespace NutraBioticsBackend.Controllers
         }
 
         // GET: ShipToes/Create
+        [SessionExpireFilter]
         public ActionResult Create()
         {
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "CustId");

@@ -9,32 +9,15 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Contacto</h4>
+        <h4>Crear Medico</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
 
 
         <div class="form-group">
             @Html.Label("Crear nuevo", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.CheckBox("nuevoContacto", false, htmlAttributes: new { @id = "newContact"})
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.Label("Numero Medico", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PerConID, new { htmlAttributes = new { @id = "perid", @class = "form-control" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Medico", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PerConID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PerConID, "", new { @class = "text-danger" })
+                @Html.CheckBox("nuevoContacto", false, htmlAttributes: new { @id = "newContact" })
             </div>
         </div>
 
@@ -46,16 +29,33 @@
             </div>
         </div>
 
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PagerNum, "Cedula Rep.", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model=> model.PagerNum, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PagerNum, "", new { @class = "text-danger" })
+        <div id="percondiv">
+            <div class="form-group">
+                @Html.Label("Numero Medico", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PerConID, new { htmlAttributes = new { @id = "perid", @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Medico", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("PerConID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PerConID, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
+        <div id="pagerNum">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PagerNum, "Cedula Rep.", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PagerNum, new { htmlAttributes = new { @id = "pagerNum", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PagerNum, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
+    <div id="nombremedico">
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -63,11 +63,12 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
+        </div>
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-Nutra" />
+                <input type="submit" value="Crear" id="btncrear" class="btn btn-Nutra" />
             </div>
         </div>
     </div>
@@ -171,25 +172,59 @@ $(document).ready(function () {
     })
     })
 
+    $(document).ready(function () {
+        if ($("#newContact").prop("checked") == true) {
+            $("#PerConID").prop('disabled', true);
+            $("#perid").prop('disabled', true);
+            $("#Name").prop("value", "");
+            $("#percondiv").hide();
+        }
+        else
+        {
+            $("#percondiv").show();
+            $("#PerConID").prop('disabled', false);
+            $("#perid").prop('disabled', false);
+            $("#pagerNum").prop('disabled', true);
+            $("#pagerNum").hide();
+            $("#nombremedico").hide();
+        }
+        return false;
+    });
+
 
     $(document).ready(function () {
         $("#newContact").change(function (){
             if ($("#newContact").prop("checked") == true){
                 $("#PerConID").prop('disabled', true);
                 $("#perid").prop('disabled', true);
+                $("#Name").prop("value", "");
+                $("#percondiv").hide();
+                $("#pagerNum").show();
+                $("#nombremedico").show();
                 //$("#PerConID").prop('value', 9999);
             }
             else
             {
+                $("#percondiv").show();
                 $("#PerConID").prop('disabled', false);
                 $("#perid").prop('disabled', false);
                 $("#Name").prop('disabled', false);
                 $("#Email").prop('disabled', false);
+                $("#pagerNum").hide();
+                $("#nombremedico").hide();
             }
             return false;
         })
     })
 
+
+//$('#btncrear').click(function () {
+//        var PagerNum = $('#pagerNum').val();
+//        if (PagerNum == null && $("#newContact").prop("checked") == true) {
+//            alert("Debe ingresar cedula de representante");
+//        }
+//        return false;
+// });
 
 
 

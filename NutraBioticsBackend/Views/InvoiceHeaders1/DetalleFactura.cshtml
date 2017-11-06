@@ -1,0 +1,38 @@
+﻿@model IEnumerable< NutraBioticsBackend.Models.InvoiceDetail>
+@using GridMvc.Html
+
+
+@{
+    ViewBag.Title = "Detalle Factura";
+}
+
+<h2>Detalle Factura</h2>
+
+
+
+<div class="container" id="results">
+
+    @Html.Grid(Model).Named("detailsgrid").Columns(columns =>
+{
+    columns.Add(u => u.InvoiceNum).Titled("Numero Factura").SetWidth(110).Sortable(true);
+
+    columns.Add(u => u.PartNum).Titled("# Parte").SetWidth(110).Sortable(true);
+
+    columns.Add(u => u.PartDescription).Titled("Descripcion").SetWidth(110).Sortable(true).Filterable(true);
+
+    columns.Add(u => u.OurShipQty).Titled("Cantidad").SetWidth(110).Sortable(true).Filterable(true);
+
+
+    columns.Add(u => u.UnitPrice).Titled("Precio").SetWidth(110).Sortable(true).Filterable(true);
+
+
+}).WithPaging(20)
+
+</div>
+
+<div>
+    @Html.ActionLink("Regresar", "Search")
+</div>
+
+
+

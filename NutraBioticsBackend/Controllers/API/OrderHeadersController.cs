@@ -162,10 +162,14 @@ namespace NutraBioticsBackend.Controllers.API
                                     Name = shipto.ShipToName,
                                     PhoneNum = shipto.PhoneNum,
                                     PerConID = 0,
-                                    PagerNum = "",
+                                    PagerNum = "0",
                                     ConNum = 1,
                                     ShipToNum = shipto.ShipToNum,
                                     ShipToId = shipto.ShipToId,
+                                    RowMod = "C",
+                                    SincronizadoEpicor = false,
+                                    VendorId = shipto.VendorId,
+                                    CustNum = shipto.CustNum,
                                 };
 
                                 db.Contacts.Add(contact);
@@ -200,6 +204,7 @@ namespace NutraBioticsBackend.Controllers.API
                             CreditHold = order.CreditHold,
                             CustomerId = order.CustomerId,
                             Date = order.Date,
+                            InvoiceNum = order.InvoiceNum,
                             SalesCategory = order.SalesCategory,
                             Observations = order.Observations,
                             ShipToId = order.ShipToId,

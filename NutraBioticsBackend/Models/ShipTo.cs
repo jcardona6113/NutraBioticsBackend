@@ -13,6 +13,7 @@
         [Display(Name = "Cliente POS")]
         public int CustomerId { get; set; }
 
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string ShipToNum { get; set; }  //Epicor
 
         [Editable(false)]
@@ -24,11 +25,12 @@
         [Display(Name = "Paciente")]
         public string ShipToName { get; set; }
 
-
         [Display(Name = "Territorio")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string TerritoryEpicorId { get; set; }
 
         [Display(Name = "Pais")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public int CountryId { get; set; }
 
         [Display(Name = "Pais")]
@@ -52,6 +54,7 @@
         [Display(Name = "Barrio")]
         public string Address3 { get; set; }
 
+        [MaxLength(20, ErrorMessage = "El campo {0} debe tener máximo {1} carácteres")]
         [Display(Name = "Telefono")]
         public string PhoneNum { get; set; }
 

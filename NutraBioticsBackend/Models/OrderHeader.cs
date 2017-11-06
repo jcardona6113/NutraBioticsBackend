@@ -44,6 +44,10 @@
         [Display(Name = "Facturada")]
         public bool Invoiced { get; set; }
 
+        [Editable(false)]
+        [Display(Name = "#Factura")]
+        public int InvoiceNum { get; set; }
+
         [Display(Name = "Fecha Orden")]
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }

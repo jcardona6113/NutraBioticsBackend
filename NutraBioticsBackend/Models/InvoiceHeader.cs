@@ -1,10 +1,8 @@
 ﻿namespace NutraBioticsBackend.Models
 {
     using System;
-    using Newtonsoft.Json;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+
     public class InvoiceHeader
     {
         [Key]
@@ -28,10 +26,13 @@
 
         public bool CheckSaldo { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? InvoiceDate { get; set; }
-      
+
+        [DataType(DataType.Date)]
         public DateTime? ClosedDate { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? DueDate { get; set; }
 
         public int DiasVencimiento { get; set; }

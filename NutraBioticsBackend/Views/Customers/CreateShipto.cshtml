@@ -18,7 +18,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("CustomerId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("CustomerId", null, htmlAttributes: new { id= "CstNum", @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ShipToNum, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ShipToNum, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ShipToNum, new { htmlAttributes = new {@id="ShpToNum", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ShipToNum, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -170,6 +170,32 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
+
+
+           $(document).ready(
+            function ()
+            {
+                $("#ShpToNum").focusout(function ()
+                {
+                            $.ajax({
+                                type: 'POST',
+                                url: '@Url.Action("ValidarSh")',
+                                dataType: 'json',
+                                data: { ShipToNum: $("#ShpToNum").val(), CustNum: $("#CstNum").val() },
+                                success: function (shipto)
+                                {
+                                    if (shipto != null)
+                                    {
+                                        alert("El # de paciente : " + shipto.ShipToNum + " , ya se encuentra registrado.");
+                                        $("#ShpToNum").prop('value', "");
+                                    }
+                                },
+                            });
+                            return false;
+                })
+            }
+        );
+
         $(document).ready(
             function ()
             {
@@ -198,8 +224,8 @@
                                 },
                             });
                             return false;
-                })
-            }
-        );
+                   })
+               }
+           );
     </script>
 }

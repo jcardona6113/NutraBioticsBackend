@@ -1,0 +1,138 @@
+﻿@model NutraBioticsBackend.Models.InvoiceHeader
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InvoiceHeader</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Names)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Names)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceBal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceBal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckSaldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckSaldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClosedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClosedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiasVencimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiasVencimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpenInvoice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpenInvoice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InvoiceHeaderId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

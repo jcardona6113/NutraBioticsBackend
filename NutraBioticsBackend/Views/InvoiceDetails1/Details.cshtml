@@ -1,0 +1,114 @@
+﻿@model NutraBioticsBackend.Models.InvoiceDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InvoiceDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceHeaderId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceHeaderId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceLine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceLine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OurShipQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OurShipQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExtPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExtPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocTaxAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocTaxAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InvoiceDetailId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

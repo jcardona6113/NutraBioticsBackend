@@ -19,8 +19,8 @@
         [Display(Name = "Cedula Medico")]
         public int PerConID { get; set; }
 
+
         [Display(Name = "Cedula Rep.")]
-        [Required(AllowEmptyStrings = true)]
         public string PagerNum { get; set; }
 
         [Editable(false)]
@@ -36,6 +36,7 @@
         public string Company { get; set; }
 
         [Display(Name = "Medico")]
+        [MaxLength(50, ErrorMessage = "El campo {0} debe tener máximo {1} carácteres")]
         public string Name { get; set; }
 
         [Display(Name = "Pais")]

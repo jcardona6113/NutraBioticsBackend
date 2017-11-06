@@ -1,0 +1,99 @@
+﻿@model IEnumerable<NutraBioticsBackend.Models.InvoiceDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceHeaderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OurShipQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExtPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxAmt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocTaxAmt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceHeaderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceLine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OurShipQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocTaxAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.InvoiceDetailId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InvoiceDetailId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InvoiceDetailId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -208,6 +208,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Clases\MailHelper.cs" />
+    <Compile Include="Clases\SessionExpireFilterAttribute.cs" />
     <Compile Include="Clases\SessionHelper.cs" />
     <Compile Include="Clases\UsersHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -228,10 +229,13 @@
     <Compile Include="Controllers\API\TerritoriesController.cs" />
     <Compile Include="Controllers\API\UsersController.cs" />
     <Compile Include="Controllers\API\VendorsController.cs" />
+    <Compile Include="Controllers\CashHeadersController.cs" />
     <Compile Include="Controllers\clsConexion.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceDetails1Controller.cs" />
     <Compile Include="Controllers\InvoiceDetailsController.cs" />
+    <Compile Include="Controllers\InvoiceHeaders1Controller.cs" />
     <Compile Include="Controllers\InvoiceHeadersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
@@ -249,6 +253,7 @@
     <Compile Include="Models\AddproductView.cs" />
     <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\CashHeader.cs" />
+    <Compile Include="Models\ChashHeaderView.cs" />
     <Compile Include="Models\CombosHelper.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Contact.cs" />
@@ -261,6 +266,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InvoiceDetail.cs" />
     <Compile Include="Models\InvoiceHeader.cs" />
+    <Compile Include="Models\InvoiceHeaderView.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MovementsHelper.cs" />
@@ -299,6 +305,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\gridmvc.datepicker.css" />
+    <Content Include="Content\gridmvc.datepicker.min.css" />
     <Content Include="Content\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\images\ui-bg_glass_100_f6f6f6_1x400.png" />
@@ -366,6 +374,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Imagenes\icons8-Escoba-48.png" />
     <Content Include="Imagenes\Nutrbiotics.jpeg" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -485,6 +494,28 @@
     <Content Include="Views\PersonContacts\Details.cshtml" />
     <Content Include="Views\PersonContacts\Edit.cshtml" />
     <Content Include="Views\PersonContacts\Index.cshtml" />
+    <Content Include="Views\OrderHeaders\ModalSearch.cshtml" />
+    <Content Include="Views\InvoiceHeaders1\Search.cshtml" />
+    <Content Include="Views\InvoiceHeaders1\Create.cshtml" />
+    <Content Include="Views\InvoiceHeaders1\Delete.cshtml" />
+    <Content Include="Views\InvoiceHeaders1\Details.cshtml" />
+    <Content Include="Views\InvoiceHeaders1\Edit.cshtml" />
+    <Content Include="Views\InvoiceHeaders1\Index.cshtml" />
+    <Content Include="Views\InvoiceHeaders1\ResultadosBusquedaFacturas.cshtml" />
+    <Content Include="Views\CashHeaders\Search.cshtml" />
+    <Content Include="Views\CashHeaders\ResultadosBusquedaPagos.cshtml" />
+    <Content Include="Views\CashHeaders\Create.cshtml" />
+    <Content Include="Views\CashHeaders\Delete.cshtml" />
+    <Content Include="Views\CashHeaders\Details.cshtml" />
+    <Content Include="Views\CashHeaders\Edit.cshtml" />
+    <Content Include="Views\CashHeaders\Index.cshtml" />
+    <Content Include="Views\InvoiceDetails1\Create.cshtml" />
+    <Content Include="Views\InvoiceDetails1\Delete.cshtml" />
+    <Content Include="Views\InvoiceDetails1\Details.cshtml" />
+    <Content Include="Views\InvoiceDetails1\Edit.cshtml" />
+    <Content Include="Views\InvoiceDetails1\Index.cshtml" />
+    <Content Include="Views\InvoiceHeaders1\DetalleFactura.cshtml" />
+    <Content Include="Views\OrderHeaders\ConsultaOrdenes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -416,10 +416,19 @@ namespace NutraBioticsBackend.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            int userid = Convert.ToInt32(Session["User"]);
+            var newordervie = db.NewOrderView.Where(nv=> nv.UserId == userid).FirstOrDefault();
+
+            if (newordervie != null)
+            {
+                db.NewOrderView.Remove(newordervie);
+                db.SaveChanges();
+            }
 
             Session["VendorId"] = null;
             Session["Company"] = null;
             Session["Plant"] = null;
+            Session["User"] = null;
 
             return RedirectToAction("Index", "Home");
         }

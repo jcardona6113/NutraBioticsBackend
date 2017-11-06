@@ -130,6 +130,7 @@ namespace NutraBioticsBackend.Controllers
                 //cargo shiptoes diferentes de rowmod U
                 ShipTos = customer.ShipTos.Where(s => s.RowMod != "D").ToList(),
             };
+
             return View(customerview);
         }
 
@@ -259,7 +260,7 @@ namespace NutraBioticsBackend.Controllers
 
 
         // GET: Customers/CreateShipTo
-
+        [SessionExpireFilter]
         public ActionResult CreateShipTo(int id)
         {
             ViewBag.CustomerId = new SelectList(db.Customers.Where(c => c.VendorId == sessionVendorID && c.CustomerId == id), "CustomerId", "Names", id);
@@ -274,14 +275,25 @@ namespace NutraBioticsBackend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilter]
         public ActionResult CreateShipTo(ShipTo shipTo)
         {
-
             var country = db.Countries.Find(shipTo.CountryId);
             shipTo.Country = country.Description;
 
             var customer = db.Customers.Where(c => c.CustomerId == shipTo.CustomerId).FirstOrDefault();
             shipTo.CustNum = customer.CustNum;
+
+            //Valido si el shipto ya existe para el cliente
+            var shipto = db.ShipToes.Where(s => s.ShipToNum == shipTo.ShipToNum && s.CustNum == shipTo.CustNum).FirstOrDefault();
+
+            if (shipto != null)
+            {
+                TempData["CustomError"] = "El numero del paciente : " + shipto.ShipToNum.ToString() + " , ya se encuentra registrado.";
+                return RedirectToAction("Details" + "/" + shipTo.CustomerId);
+            }
+
+
 
             //Uso de variables de Session.
             shipTo.VendorId = sessionVendorID;
@@ -336,6 +348,8 @@ namespace NutraBioticsBackend.Controllers
                 CustNum = shipTo.CustNum,
                 Company = shipTo.Company,
                 Address = shipTo.Address,
+                Address2 = shipTo.Address2,
+                Address3 = shipTo.Address3,
                 State = shipTo.State,
                 Email = shipTo.Email,
                 Country = shipTo.Country,
@@ -444,6 +458,7 @@ namespace NutraBioticsBackend.Controllers
         #region Contactos
 
         // GET: Contacts/Create
+        [SessionExpireFilter]
         public ActionResult CreateContact(int? id)
         {
        
@@ -460,6 +475,7 @@ namespace NutraBioticsBackend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilter]
         public ActionResult CreateContact(Contact contact)
         {
             if (ModelState.IsValid)
@@ -475,7 +491,16 @@ namespace NutraBioticsBackend.Controllers
                     contact.Country = "Colombia";
                 }
 
-                   var percon = db.PersonContacts.Where(s => s.PerConID == contact.PerConID).FirstOrDefault();
+                var percon = db.PersonContacts.Where(s => s.PerConID == contact.PerConID).FirstOrDefault();
+                if (string.IsNullOrEmpty(contact.PagerNum))
+                {
+                    contact.PagerNum = "0";
+                }
+                if (contact.Name == null) { contact.Name = string.Empty; }
+                if (contact.PerConID == 0 && contact.Name == string.Empty) { contact.Name = "Sin Nombre"; }
+                if (contact.PerConID != 0 && contact.Name == string.Empty) { contact.Name = percon.Name; }
+
+              
 
                     //contact.Name = percon.Name;
                     //contact.Address = percon.Address1;
@@ -563,14 +588,29 @@ namespace NutraBioticsBackend.Controllers
                     contact.Country = "Colombia";
                 }
 
-                //var percon = db.PersonContacts.Where(s => s.PerConID == contact.PerConID).FirstOrDefault();
+                if (contact.Name == null) { contact.Name = string.Empty; }
+
+                if(contact.PerConID != 0) {
+
+                    var percon = db.PersonContacts.Where(s => s.PerConID == contact.PerConID).FirstOrDefault();
+                    if (contact.Name == string.Empty)
+                    {
+                        contact.Name = percon.Name;
+                    }
+                }
+
+              
+                if (contact.PerConID == 0 && contact.Name == string.Empty) { contact.Name = "Sin Nombre"; }
+
+
+
                 //contact.Name = percon.Name;
 
-               // var UltimoRegistro = db
-               //.Contacts
-               //.OrderByDescending(c => c.ConNum)
-               //.Where(c => c.ShipToId == contact.ShipToId)
-               //.FirstOrDefault();
+                // var UltimoRegistro = db
+                //.Contacts
+                //.OrderByDescending(c => c.ConNum)
+                //.Where(c => c.ShipToId == contact.ShipToId)
+                //.FirstOrDefault();
 
                 //var contactNUM = db.Contacts.Where(c => c.ContactId == contact.ContactId).FirstOrDefault();
 
@@ -678,6 +718,15 @@ namespace NutraBioticsBackend.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var perconid = db.PersonContacts.Where(s => s.PerConID == PerConID);
             return Json(perconid, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ValidarSh(string ShipToNum, int? CustNum)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            var custnum = db.Customers.Where(c => c.CustomerId == CustNum).FirstOrDefault();
+            var shipto = db.ShipToes.Where(s => s.CustNum == custnum.CustNum && s.ShipToNum == ShipToNum).FirstOrDefault();
+            return Json(shipto, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetContactName(int? PerConID)

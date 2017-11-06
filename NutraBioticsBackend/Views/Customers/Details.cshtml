@@ -144,8 +144,8 @@
     columns.Add().Encoded(false).Sanitized(false).SetWidth(5)
     .RenderValueAs(o => @Html.ActionLink("Editar", "EditShipTo", new { id = o.ShipToId }, new { @class = "btn btn-Nutra" }));
 
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(5)
-.RenderValueAs(o => @Html.ActionLink("Borrar", "DeleteShipTo", new { id = o.ShipToId }));
+    //    columns.Add().Encoded(false).Sanitized(false).SetWidth(5)
+    //.RenderValueAs(o => @Html.ActionLink("Borrar", "DeleteShipTo", new { id = o.ShipToId }));
 
 
     //columns.Add(c => c.CustNum).Titled("Pais").SetWidth(110);

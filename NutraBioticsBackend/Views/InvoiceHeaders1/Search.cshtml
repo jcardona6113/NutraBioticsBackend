@@ -1,0 +1,418 @@
+﻿@model NutraBioticsBackend.Models.InvoiceHeaderView
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Consulta Facturas";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="form-horizontal">
+    <h4>Busqueda de Facturas</h4>
+
+    <hr />
+
+    <table>
+        @*<tr>
+            <td>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <button id="btnSearchCustomer" type="button"
+                                class="btn btn-Nutra">
+                            Cliente
+                        </button>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.DropDownList("CustNum", null, htmlAttributes: new { @id = "CustNumId", @class = "form-control" })
+                    </div>
+                </div>
+            </td>
+        </tr>*@
+        <tr>
+            <td>
+                <div class="form-group">
+                    @Html.Label("Periodo", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.pFiltroPeriodo, htmlAttributes: new { @id = "filtroperiodo" })
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.Label("Seleccione Periodo", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("PeriodId", null, htmlAttributes: new { @id = "PeriodId", @class = "form-control" })
+                    </div>
+                </div>
+            </td>
+            <td>
+
+
+                <div class="form-group">
+               
+                    <div class="col-md-10">
+                        @Html.Label("Fecha Inicial Periodo", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.pCalendarFInicial, new { htmlAttributes = new {@id="pcalFInicial",  @class = "form-control" } })
+                    </div>
+                </div>
+
+            </td>
+            <td>
+                <div class="form-group">
+            
+                    <div class="col-md-10">
+                        @Html.Label("Fecha Final Periodo", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.pCalendarFFinal, new { htmlAttributes = new { @id = "pcalFFinal", @class = "form-control" } })
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+
+                <div class="form-group">
+                    @Html.Label("Fechas", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model =>model.pFiltroFechas, htmlAttributes: new { @id = "filtrofechas" })
+                    </div>
+                </div>
+            </td>
+            <td>
+                @Html.Label("Fecha Inicial", htmlAttributes: new { @class = "control-label" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class='input-group date' id='FInicial' style="width:280px">
+                            @Html.EditorFor(model => model.pFechaInicial, new { htmlAttributes = new { @class = "form-control" } })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class='input-group date' id='FFinal' style="width:280px">
+                            @Html.EditorFor(model => model.pFechaFinal, new { htmlAttributes = new { @class = "form-control" } })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+
+
+            <td>
+                @Html.Label("Facturas con Saldo", htmlAttributes: new { @class = "control-label" })
+                <div class="form-group">
+                  
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.pFacturaConSaldo, htmlAttributes: new { @id = "filtrofactsaldo" })
+                    </div>
+                </div>
+            </td>
+            <td>
+
+            </td>
+            <td>
+                <div>@Html.ActionLink("Buscar", "ResultadosBusquedaFacturas", "InvoiceHeaders1", null, new { @id = "btnSearchInvoices", @class = "btn btn-Nutra" })</div>
+            </td>
+
+
+        </tr>
+    </table>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="modal fade" tabindex="-1" id="BuscarClienteDiv"
+                     data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    ×
+                                </button>
+                                <h4 class="modal-title">Buscar Cliente...</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input class="form-control" type="text"
+                                                       placeholder="ID Cliente..." id="InputCustID" />
+                                            </td>
+                                            <td>
+                                                <input class="form-control" type="text" readonly="readonly"
+                                                       placeholder="Cliente.." id="OutCustName" />
+                                            </td>
+                                            <td>
+                                                <button id="ExecSearchCustomer" type="button"
+                                                        class="btn btn-Nutra">
+                                                    Buscar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br />
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="SearchCustomerCompleted" class="btn btn-Nutra">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="container" id="results">
+
+    @Html.Grid(Model.InvoiceHeaders).Named("InvoicesGrid").Columns(columns =>
+{
+    columns.Add(u => u.InvoiceNum).Titled("Numero Factura").SetWidth(110).Sortable(true);
+
+    columns.Add(u => u.Names).Titled("Cliente").SetWidth(110).Sortable(true);
+
+    columns.Add(u => u.InvoiceDate).Titled("Fecha").SetWidth(110).Sortable(true);
+
+    columns.Add(u => u.InvoiceAmt).Titled("Monto Factura").SetWidth(110);
+
+
+}).WithPaging(20)
+
+</div>*@
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>*@
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#btnSearchCustomer").click(function () {
+                $("#CustNumId").empty();
+                $("#BuscarClienteDiv").modal('show');
+            });
+        });
+
+        $(document).ready(function () {
+            $("#btnSearchCustomer").click(function () {
+                $("#CustNumId").empty();
+                $("#BuscarClienteDiv").modal('show');
+            });
+        });
+
+
+        $("#ExecSearchCustomer").click(function () {
+            $.ajax({
+                url: '@Url.Action("SearchCustomer")',
+                                dataType: 'json',
+                                type: "POST",
+                                data: { pCustID: $("#InputCustID").val()},
+                                success: function (customer) {
+                                    if (customer.CustomerId != 99999) {
+                                        $("#OutCustName").prop("value", customer.Names);
+                                        $("#CustNumId").empty();
+                                        $("#CustNumId").append('<option value="'
+                                            + customer.CustomerId + '">'
+                                            + customer.Names + '</option>');
+                                    }
+                                    else {
+                                        alert("No Encontrado");
+                                    }
+                                },
+                            });
+                            return false;
+
+        });
+
+
+        $("#SearchCustomerCompleted").click(function () {
+            $("#BuscarClienteDiv").modal('hide');
+        });
+
+
+        $(document).ready(function () {
+            $("#FFinal").prop('disabled', true);
+            $("#FInicial").prop('disabled', true);
+            $('#pcalFInicial').prop('disabled', true);
+            $('#pcalFFinal').prop('disabled', true);
+            $('#PeriodId').prop('disabled', true);
+            });
+
+
+
+
+        $(document).ready(function () {
+            $("#filtrofechas").change(function () {
+                if ($("#filtrofechas").prop("checked") == true) {
+                    $("#FFinal").prop('disabled', false);
+                    $("#FInicial").prop('disabled', false);
+                    $('#pcalFInicial').prop('disabled', true);
+                    $('#pcalFFinal').prop('disabled', true);
+                    $('#filtroperiodo').prop('checked', false);
+                    $('#PeriodId').prop('disabled', true);
+                }
+                else {
+                    $("#FFinal").prop('disabled', true);
+                    $("#FInicial").prop('disabled', true);
+                    $('#pcalFInicial').prop('disabled', false);
+                    $('#pcalFFinal').prop('disabled', false);
+                    $('#PeriodId').prop('disabled', false);
+
+                }
+                return false;
+            })
+        })
+
+
+
+        $(document).ready(function () {
+            $("#filtroperiodo").change(function () {
+                if ($("#filtroperiodo").prop("checked") == true) {
+                    $("#FFinal").prop('disabled', true);
+                    $("#FInicial").prop('disabled', true);
+                    $('#pcalFInicial').prop('disabled', false);
+                    $('#pcalFFinal').prop('disabled', false);
+                    $('#filtrofechas').prop('checked', false);
+                    $('#PeriodId').prop('disabled', false);
+                }
+                else {
+                    $("#FFinal").prop('disabled', false);
+                    $("#FInicial").prop('disabled', false);
+                    $('#pcalFInicial').prop('disabled', true);
+                    $('#pcalFFinal').prop('disabled', true);
+                    $('#PeriodId').prop('disabled', true);
+                }
+                return false;
+            })
+        })
+
+
+
+        $(document).ready(function () {
+            $("#PeriodId").focusout(function () {
+                $.ajax({
+                    url: '@Url.Action("CargarFechasXPeriodo")',
+                    dataType: 'json',
+                    type: "POST",
+                    data: { CalendarId: $("#PeriodId").val() },
+                    success: function (calendar) {
+
+                        var BoardStart = new Date(parseInt(calendar.StartDate.replace("/Date(", "").replace(")/", ""), 10));
+                        var FechaInicial = moment(BoardStart).format('MM-DD-YYYY');
+
+                        var BoardStart2 = new Date(parseInt(calendar.EndDate.replace("/Date(", "").replace(")/", ""), 10));
+                        var FechaFinal = moment(BoardStart2).format('MM-DD-YYYY');
+
+                        $('#pCalendarFInicial').prop("value", FechaInicial);
+                        $('#pCalendarFFinal').prop("value", FechaFinal);
+                    }
+                });
+
+                return false;
+            })
+        });
+
+
+        $(document).ready(function () {
+            $("#PeriodId").change(function () {
+                $.ajax({
+                    url: '@Url.Action("CargarFechasXPeriodo")',
+                    dataType: 'json',
+                    type: "POST",
+                    data: { CalendarId: $("#PeriodId").val() },
+                    success: function (calendar) {
+
+                        var BoardStart = new Date(parseInt(calendar.StartDate.replace("/Date(", "").replace(")/", ""), 10));
+                        var FechaInicial = moment(BoardStart).format('MM-DD-YYYY');
+
+                        var BoardStart2 = new Date(parseInt(calendar.EndDate.replace("/Date(", "").replace(")/", ""), 10));
+                        var FechaFinal = moment(BoardStart2).format('MM-DD-YYYY');
+
+                        $('#pcalFInicial').prop("value", FechaInicial);
+                        $('#pcalFFinal').prop("value", FechaFinal);
+                    }
+                });
+
+                return false;
+            })
+        });
+
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('#FInicial').datetimepicker({ format: 'MM-DD-YYYY HH:mm:ss' });
+            $('#FInicial').prop("setDate", Date.now);
+
+            $('#FFinal').datetimepicker({ format: 'MM-DD-YYYY HH:mm:ss' });
+            $('#FFinal').prop("setDate", Date.now);
+        });
+    </script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#btnSearchInvoices').click(function () {
+                var pfinicial = $('#pFechaInicial').val();
+                var pffinal = $('#pFechaFinal').val();
+                var pcalendarfinicial = $('#pcalFInicial').val();
+                var pcalendarffinal = $('#pcalFFinal').val();
+
+
+                var pFacturaConSaldo = $('#filtrofactsaldo').prop("checked");
+                var pFiltroFechas = $('#filtrofechas').prop("checked");
+                var pFiltroPeriodo = $('#filtroperiodo').prop("checked");
+                var pFiltroCliente = false;
+                var pFechaInicial = pfinicial;
+                var pFechaFinal = pffinal;
+
+                var pCalendarFInicial = pcalendarfinicial;
+                var pCalendarFFinal = pcalendarffinal;
+
+
+                var path = '@Url.Content("~/InvoiceHeaders1/ResultadosBusquedaFacturas")' + "?pFacturaConSaldo=" + pFacturaConSaldo + "&pFiltroFechas=" + pFiltroFechas + "&pFiltroPeriodo=" + pFiltroPeriodo + "&pFiltroCliente=" + false + "&pFechaInicial=" + pFechaInicial + "&pFechaFinal=" + pFechaFinal + "&pCalendarFInicial=" + pCalendarFInicial + "&pCalendarFFinal=" + pCalendarFFinal;
+                $(this).attr("href", path);
+
+            });
+        });
+
+
+    </script>
+
+
+
+
+}
