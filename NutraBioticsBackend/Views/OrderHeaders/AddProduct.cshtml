@@ -1,11 +1,10 @@
-﻿@model NutraBioticsBackend.Models.AddproductView
+@model NutraBioticsBackend.Models.AddproductView
 @{
     ViewBag.Title = "Agregar Producto";
 }
 
 <h2>Adicionar Producto</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -56,7 +55,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Agregar" class="btn btn-Nutra" />
+                <input type="button" id="add" value="Agregar" class="btn btn-Nutra"/>
                 @Html.ActionLink("Regresar", "Create")
             </div>
         </div>
@@ -70,6 +69,12 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
+        $("#add").click(function () {
+            if ($(this).valid()) {
+                $("#add").prop("disabled", true);
+                $("#frm").submit();
+        }
+    })
     $(document).ready
     (
         function () {
