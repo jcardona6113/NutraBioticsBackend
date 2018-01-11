@@ -1,4 +1,4 @@
-﻿@model NutraBioticsBackend.Models.NewOrderView
+@model NutraBioticsBackend.Models.NewOrderView
 
 @{
     ViewBag.Title = "Crear Orden";
@@ -241,9 +241,10 @@
             <div class="col-md-offset-0 col-md-10">
                 @*@Html.ActionLink("Agregar Producto", "AddProduct", new { PriceListId = Model.PriceListId, SalesOrderHeaderId=Model.SalesOrderHeaderId, CustomerId=Model.CustomerId, ShipToId=Model.ShipToId, ContactId=Model.ContactId, Date=Model.Date, NeedByDate=Model.NeedByDate, Observations=Model.Observations })*@
                 <input type="submit" value="Guardar" formmethod="post" class="btn btn-Nutra" />
-
+                <input type="button" value="Borrrar Todo" id="btndeleteall" class="btn btn-Nutra" />
             </div>
         </div>
+
         <hr />
     </div>
 
@@ -357,8 +358,16 @@ else
                 var path = '@Url.Content("~/OrderHeaders/Create")'
                 $(this).attr("href", path);
             }
+     });
+    $('#btndeleteall').click(function () {
+         $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("DeleteTemp")',
+                    dataType: 'json',
+                                        
         });
-
+        location.reload();
+    });
         $(document).ready(
             function ()
             {
